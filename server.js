@@ -77,6 +77,7 @@ Keep responses clear, warm, and encouraging. Never give the answer immediately â
     res.json({ reply });
   } catch (error) {
     console.error('Tutor API error:', error);
+
     res.status(500).json({
       error: 'The AI tutor is unavailable right now. Please try again.',
     });
