@@ -1,985 +1,2687 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luminary Academy — Data Science · Python · Power BI · Mathematics</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-:root{
-  --c1:#00ffa3;--c2:#00d4ff;--c3:#7b61ff;--c4:#ff6b6b;--gold:#ffd166;
-  --bg:#03090a;--bg2:#060f10;--bg3:#0a1a1c;
-  --txt:#f0faf8;--dim:rgba(240,250,248,.55);--muted:rgba(240,250,248,.3);
-  --em:rgba(0,255,163,.18);--em-b:rgba(0,255,163,.25);
-  --r:24px;--max:1160px;
-}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luminary Academy — AI · Data · Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");opacity:.4;pointer-events:none;z-index:0}
-#c{position:fixed;inset:0;z-index:0;pointer-events:none}
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px
+    }
 
-/* NAV */
-nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:999;width:calc(100% - 48px);max-width:1100px;height:64px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;border-radius:100px;background:rgba(6,15,16,.7);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border:1px solid rgba(0,255,163,.1);box-shadow:0 8px 48px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05)}
-.nlogo{text-decoration:none;display:flex;align-items:center;gap:10px}
-.nlogo-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#00ffa3,#00d4ff);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(0,255,163,.4)}
-.nlogo-mark svg{width:18px;height:18px}
-.nlogo-text{font-family:'Cormorant',serif;font-size:22px;font-weight:600;color:#fff;letter-spacing:.02em}
-.nlinks{display:flex;gap:8px;list-style:none}
-.nlinks a{font-size:13px;font-weight:500;color:var(--dim);text-decoration:none;padding:7px 16px;border-radius:100px;transition:all .25s}
-.nlinks a:hover{color:#fff;background:rgba(255,255,255,.06)}
-.nenroll{background:linear-gradient(135deg,#00ffa3,#00d4ff)!important;color:#000!important;font-weight:700!important;box-shadow:0 0 20px rgba(0,255,163,.3);transition:all .3s!important}
-.nenroll:hover{box-shadow:0 0 36px rgba(0,255,163,.55)!important;transform:scale(1.04)!important}
+    :root {
+      --navy: #0A0E27;
+      --navy2: #0D1235;
+      --navy3: #111640;
+      --blue: #1E6FFF;
+      --blue2: #3D87FF;
+      --blue3: #1050CC;
+      --gold: #F5C842;
+      --gold2: #E8B830;
+      --white: #FFFFFF;
+      --off: #F0F4FF;
+      --dim: rgba(240, 244, 255, .6);
+      --muted: rgba(240, 244, 255, .35);
+      --max: 1140px;
+      --r: 12px;
+    }
 
-/* HERO */
-#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 24px 100px;position:relative;overflow:hidden;z-index:1}
-.hero-orbs{position:absolute;inset:0;pointer-events:none}
-.orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.18}
-.orb-a{width:700px;height:700px;background:radial-gradient(circle,#00ffa3,transparent 70%);top:-200px;left:-200px;animation:orbFloat 14s ease-in-out infinite}
-.orb-b{width:500px;height:500px;background:radial-gradient(circle,#00d4ff,transparent 70%);bottom:-150px;right:-150px;animation:orbFloat 18s 3s ease-in-out infinite reverse}
-.orb-c{width:400px;height:400px;background:radial-gradient(circle,#7b61ff,transparent 70%);top:40%;left:60%;animation:orbFloat 22s 6s ease-in-out infinite}
-@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-30px,20px) scale(.95)}}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,163,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,163,.03) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent)}
-.hero-inner{position:relative;z-index:2;max-width:900px}
-.hero-badge{display:inline-flex;align-items:center;gap:10px;padding:8px 20px;border-radius:100px;background:rgba(0,255,163,.06);border:1px solid rgba(0,255,163,.2);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#00ffa3;margin-bottom:48px;animation:fadeUp .8s ease both;box-shadow:0 0 32px rgba(0,255,163,.08)}
-.badge-dot{width:6px;height:6px;background:#00ffa3;border-radius:50%;box-shadow:0 0 8px #00ffa3;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero-h{font-family:'Cormorant',serif;font-size:clamp(58px,9vw,120px);font-weight:700;line-height:.95;letter-spacing:-.03em;margin-bottom:0;animation:fadeUp .9s .1s ease both}
-.hero-h .w1{display:block;color:#fff}
-.hero-h .w2{display:block;background:linear-gradient(135deg,var(--c1) 0%,var(--c2) 50%,var(--c3) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:italic;filter:drop-shadow(0 0 60px rgba(0,255,163,.3))}
-.hero-h .w3{display:block;color:rgba(255,255,255,.18);font-size:.38em;font-weight:300;font-style:italic;letter-spacing:.02em;margin-top:14px}
-.hero-p{font-size:18px;font-weight:300;color:var(--dim);max-width:640px;margin:36px auto 56px;line-height:1.8;animation:fadeUp .9s .2s ease both}
-.hero-p strong{color:#fff;font-weight:600}
-.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp .9s .3s ease both}
-.btn-shine{display:inline-flex;align-items:center;gap:10px;padding:16px 44px;border-radius:100px;background:linear-gradient(135deg,#00ffa3,#00d4ff);color:#000;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 0 60px rgba(0,255,163,.4),0 8px 32px rgba(0,0,0,.3);transition:all .35s;position:relative;overflow:hidden}
-.btn-shine::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);transition:left .5s}
-.btn-shine:hover::before{left:100%}
-.btn-shine:hover{transform:translateY(-4px) scale(1.03);box-shadow:0 0 80px rgba(0,255,163,.6),0 16px 48px rgba(0,0,0,.4)}
-.btn-ring{display:inline-flex;align-items:center;gap:10px;padding:16px 44px;border-radius:100px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--txt);font-size:15px;font-weight:500;text-decoration:none;backdrop-filter:blur(8px);transition:all .3s}
-.btn-ring:hover{border-color:rgba(0,255,163,.4);color:#00ffa3;transform:translateY(-3px);box-shadow:0 0 24px rgba(0,255,163,.1)}
-.hero-nums{margin-top:96px;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(0,255,163,.1);border-radius:20px;overflow:hidden;animation:fadeUp .9s .45s ease both;background:rgba(255,255,255,.02);backdrop-filter:blur(8px)}
-.hn{padding:30px 20px;text-align:center;border-right:1px solid rgba(0,255,163,.07);transition:background .3s}
-.hn:last-child{border-right:none}
-.hn:hover{background:rgba(0,255,163,.04)}
-.hn-v{font-family:'Cormorant',serif;font-size:50px;font-weight:700;line-height:1;background:linear-gradient(135deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(0,255,163,.4))}
-.hn-l{font-size:12px;color:var(--muted);margin-top:8px;font-weight:500;line-height:1.4}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased
+    }
 
-/* MARQUEE */
-.mq{padding:0;border-top:1px solid rgba(0,255,163,.07);border-bottom:1px solid rgba(0,255,163,.07);overflow:hidden;position:relative;z-index:1;background:rgba(0,255,163,.02)}
-.mq-track{display:flex;width:max-content;animation:mqRoll 24s linear infinite}
-.mq-item{display:flex;align-items:center;gap:12px;padding:14px 36px;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
-.mq-dot{color:#00ffa3;font-size:14px;filter:drop-shadow(0 0 6px #00ffa3)}
-@keyframes mqRoll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      height: 72px;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 14, 39, .92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(245, 200, 66, .08)
+    }
 
-/* SECTIONS */
-section.s{position:relative;z-index:1;padding:140px 32px}
-.wrap{max-width:var(--max);margin:0 auto}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#00ffa3;margin-bottom:20px}
-.eyebrow::before{content:'';width:20px;height:1px;background:#00ffa3}
-.sec-h{font-family:'Cormorant',serif;font-size:clamp(40px,5vw,68px);font-weight:700;line-height:1.05;letter-spacing:-.025em;margin-bottom:20px;color:#fff}
-.sec-p{font-size:17px;font-weight:300;color:var(--dim);max-width:520px;line-height:1.8}
+    .nlogo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 14px
+    }
 
-/* HOW */
-#how{background:var(--bg2)}
-.how-glow{position:absolute;width:1000px;height:600px;bottom:-200px;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(0,255,163,.05),transparent 70%);pointer-events:none}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid rgba(255,255,255,.05);border-radius:var(--r);overflow:hidden;margin-top:72px}
-.step{padding:52px 36px;background:rgba(255,255,255,.015);position:relative;overflow:hidden;transition:all .4s;cursor:default}
-.step::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(0,255,163,.07),transparent 60%);opacity:0;transition:opacity .4s}
-.step:hover::after{opacity:1}
-.step:hover{background:rgba(0,255,163,.04);transform:translateY(-3px);box-shadow:0 20px 80px rgba(0,0,0,.5)}
-.step-border{position:absolute;left:0;top:0;bottom:0;width:1px;background:rgba(255,255,255,.05)}
-.step:first-child .step-border{display:none}
-.step-bar{position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#00ffa3,#00d4ff,#7b61ff);transform:scaleX(0);transform-origin:left;transition:transform .5s}
-.step:hover .step-bar{transform:scaleX(1)}
-.step-n{font-family:'Cormorant',serif;font-size:72px;font-weight:700;color:rgba(255,255,255,.04);line-height:1;margin-bottom:28px;transition:color .3s}
-.step:hover .step-n{color:rgba(0,255,163,.1)}
-.step-ico{font-size:28px;margin-bottom:18px;display:block;filter:drop-shadow(0 0 8px rgba(0,255,163,.3))}
-.step h3{font-size:17px;font-weight:700;color:#fff;margin-bottom:12px}
-.step p{font-size:13.5px;color:var(--muted);line-height:1.7;font-weight:300}
-.alpha-bar{margin-top:48px;padding:28px 36px;border-radius:var(--r);border:1px solid rgba(0,255,163,.15);background:rgba(0,255,163,.04);display:flex;align-items:center;gap:20px;backdrop-filter:blur(8px)}
-.ab-ico{font-size:32px}
-.ab-txt{font-size:14.5px;color:var(--dim);line-height:1.65}
-.ab-txt strong{color:#fff}
+    .nlogo-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(30, 111, 255, .4)
+    }
 
-/* SUBJECTS */
-#subjects{background:var(--bg)}
-.sub-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:72px}
-.sub-card{border-radius:var(--r);padding:48px 44px;border:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.02);position:relative;overflow:hidden;transition:all .45s;cursor:default}
-.sub-card:nth-child(1) .sc-hue{background:radial-gradient(circle,rgba(0,255,163,.12),transparent 70%)}
-.sub-card:nth-child(2) .sc-hue{background:radial-gradient(circle,rgba(0,212,255,.12),transparent 70%)}
-.sub-card:nth-child(3) .sc-hue{background:radial-gradient(circle,rgba(123,97,255,.12),transparent 70%)}
-.sub-card:nth-child(4) .sc-hue{background:radial-gradient(circle,rgba(255,209,102,.12),transparent 70%)}
-.sc-hue{position:absolute;width:350px;height:350px;border-radius:50%;top:-120px;right:-80px;opacity:0;transition:opacity .5s;pointer-events:none}
-.sub-card:hover .sc-hue{opacity:1}
-.sub-card:hover{transform:translateY(-10px);box-shadow:0 48px 120px rgba(0,0,0,.6);border-color:rgba(0,255,163,.15)}
-.sc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;position:relative;z-index:1}
-.sc-ico{width:68px;height:68px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:30px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);transition:all .4s}
-.sub-card:hover .sc-ico{box-shadow:0 0 40px rgba(0,255,163,.3);border-color:rgba(0,255,163,.25);background:rgba(0,255,163,.08)}
-.sc-btn{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--muted);transition:all .4s}
-.sub-card:hover .sc-btn{background:#00ffa3;border-color:#00ffa3;color:#000;transform:rotate(45deg)}
-.sub-card h3{font-family:'Cormorant',serif;font-size:30px;font-weight:700;color:#fff;margin-bottom:12px;position:relative;z-index:1}
-.sub-card p{font-size:15px;color:var(--dim);line-height:1.75;font-weight:300;margin-bottom:28px;position:relative;z-index:1}
-.sc-tags{display:flex;flex-wrap:wrap;gap:8px;position:relative;z-index:1}
-.sc-tag{font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#00ffa3;background:rgba(0,255,163,.07);border:1px solid rgba(0,255,163,.14);padding:5px 14px;border-radius:100px;transition:all .3s}
-.sub-card:hover .sc-tag{background:rgba(0,255,163,.12);border-color:rgba(0,255,163,.28)}
+    .nlogo-mark svg {
+      width: 20px;
+      height: 20px
+    }
 
-/* LEARNING PATHS */
-#paths{background:var(--bg2)}
-.paths-glow{position:absolute;width:800px;height:600px;top:0;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(123,97,255,.06),transparent 70%);pointer-events:none}
-.paths-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;flex-wrap:wrap;gap:24px}
-.paths-tabs{display:flex;gap:8px;flex-wrap:wrap}
-.ptab{border:none;padding:10px 20px;border-radius:100px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .3s;background:rgba(255,255,255,.05);color:var(--muted);letter-spacing:.03em}
-.ptab.active{background:linear-gradient(135deg,#00ffa3,#00d4ff);color:#000;box-shadow:0 0 24px rgba(0,255,163,.3)}
-.ptab:hover:not(.active){background:rgba(255,255,255,.08);color:#fff}
-.path-panel{display:none}
-.path-panel.active{display:block}
-.levels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.level-card{border-radius:var(--r);border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.025);overflow:hidden;transition:all .4s}
-.level-card:hover{transform:translateY(-6px);box-shadow:0 40px 100px rgba(0,0,0,.5)}
-.lc-head{padding:32px 32px 24px;border-bottom:1px solid rgba(255,255,255,.05)}
-.lc-badge{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:18px}
-.lc-badge.beg{color:#00ffa3;background:rgba(0,255,163,.08);border:1px solid rgba(0,255,163,.2)}
-.lc-badge.int{color:#00d4ff;background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2)}
-.lc-badge.adv{color:#7b61ff;background:rgba(123,97,255,.08);border:1px solid rgba(123,97,255,.2)}
-.lc-title{font-family:'Cormorant',serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:8px}
-.lc-sub{font-size:13px;color:var(--muted);line-height:1.55;font-weight:300}
-.lc-body{padding:24px 32px 32px}
-.lc-modules{list-style:none;display:flex;flex-direction:column;gap:0}
-.lc-modules li{font-size:13px;color:var(--dim);padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:10px;font-weight:300;transition:color .2s}
-.lc-modules li:last-child{border-bottom:none}
-.lc-modules li:hover{color:#fff}
-.lc-modules li::before{content:'';width:5px;height:5px;border-radius:50%;background:linear-gradient(135deg,#00ffa3,#00d4ff);flex-shrink:0}
-.lc-foot{margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between}
-.lc-lessons{font-size:12px;color:var(--muted);font-weight:500}
-.lc-start{font-size:12px;font-weight:700;color:#00ffa3;text-decoration:none;display:flex;align-items:center;gap:6px;transition:gap .2s}
-.lc-start:hover{gap:10px}
+    .nlogo-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--white);
+      letter-spacing: -.01em
+    }
 
-/* TESTIMONIALS */
-#testi{background:var(--bg)}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:72px}
-.tc{border-radius:var(--r);padding:36px;border:1px solid rgba(255,255,255,.05);background:rgba(255,255,255,.02);position:relative;overflow:hidden;transition:all .4s;cursor:default}
-.tc-glow{position:absolute;width:200px;height:200px;border-radius:50%;top:-80px;right:-60px;opacity:0;transition:opacity .4s;pointer-events:none}
-.tc:nth-child(1) .tc-glow{background:radial-gradient(circle,rgba(0,255,163,.12),transparent 70%)}
-.tc:nth-child(2) .tc-glow{background:radial-gradient(circle,rgba(255,209,102,.12),transparent 70%)}
-.tc:nth-child(3) .tc-glow{background:radial-gradient(circle,rgba(123,97,255,.12),transparent 70%)}
-.tc:hover .tc-glow{opacity:1}
-.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,255,163,.4),transparent);transform:scaleX(0);transition:transform .5s}
-.tc:hover::before{transform:scaleX(1)}
-.tc:hover{transform:translateY(-8px);box-shadow:0 40px 100px rgba(0,0,0,.5)}
-.tc-stars{display:flex;gap:3px;margin-bottom:20px}
-.ts{font-size:15px;color:var(--gold);filter:drop-shadow(0 0 6px rgba(255,209,102,.6))}
-.tc-q{font-size:14.5px;color:rgba(255,255,255,.7);line-height:1.8;margin-bottom:28px;font-style:italic;font-weight:300;position:relative;z-index:1}
-.tc-q::before{content:'"';font-family:'Cormorant',serif;font-size:56px;color:rgba(0,255,163,.2);line-height:0;vertical-align:-.55em;margin-right:2px}
-.tc-who{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
-.tc-av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#000;flex-shrink:0;box-shadow:0 0 20px rgba(0,0,0,.4)}
-.tc-name{font-weight:700;font-size:14px;color:#fff}
-.tc-role{font-size:12px;color:var(--muted);margin-top:3px}
+    .nlinks {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none
+    }
 
-/* PRICING */
-#pricing{background:var(--bg3)}
-.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:72px;align-items:start}
-.plan{border-radius:var(--r);padding:44px 40px;border:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.025);transition:all .4s;position:relative;overflow:hidden}
-.plan:hover{transform:translateY(-6px);box-shadow:0 40px 100px rgba(0,0,0,.5)}
-.plan.feat{background:linear-gradient(160deg,rgba(0,255,163,.1),rgba(0,212,255,.04),rgba(123,97,255,.04));border-color:rgba(0,255,163,.3);box-shadow:0 0 100px rgba(0,255,163,.1),inset 0 1px 0 rgba(0,255,163,.2)}
-.plan.feat:hover{box-shadow:0 48px 120px rgba(0,0,0,.6),0 0 80px rgba(0,255,163,.15)}
-.plan-crown{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#00ffa3,#00d4ff);color:#000;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:6px 20px;border-radius:100px;white-space:nowrap;box-shadow:0 4px 24px rgba(0,255,163,.5)}
-.plan-tier{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
-.plan.feat .plan-tier{color:#00ffa3}
-.plan-cost{font-family:'Cormorant',serif;font-size:68px;font-weight:700;color:#fff;line-height:1;display:flex;align-items:flex-start;gap:4px}
-.plan-cost sup{font-family:'Outfit',sans-serif;font-size:20px;font-weight:400;margin-top:16px}
-.plan-mo{font-size:13px;color:var(--muted);margin-top:8px;margin-bottom:36px}
-.plan-feats{list-style:none;margin-bottom:40px}
-.plan-feats li{font-size:13.5px;color:var(--dim);padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:12px;font-weight:300}
-.plan-feats li::before{content:'✦';font-size:9px;color:#00ffa3;filter:drop-shadow(0 0 4px #00ffa3);flex-shrink:0}
-.plan.feat .plan-feats li{color:rgba(255,255,255,.8)}
-.plan-btn{display:block;text-align:center;padding:14px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;border:1px solid rgba(255,255,255,.1);color:var(--dim);transition:all .3s}
-.plan-btn:hover{border-color:rgba(0,255,163,.4);color:#00ffa3;box-shadow:0 0 20px rgba(0,255,163,.1)}
-.plan-btn-g{display:block;text-align:center;padding:15px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;background:linear-gradient(135deg,#00ffa3,#00d4ff);color:#000;box-shadow:0 8px 40px rgba(0,255,163,.4);transition:all .35s;position:relative;overflow:hidden}
-.plan-btn-g::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transition:left .5s}
-.plan-btn-g:hover::before{left:100%}
-.plan-btn-g:hover{box-shadow:0 12px 56px rgba(0,255,163,.6);transform:translateY(-2px)}
+    .nlinks a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--dim);
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all .2s
+    }
 
-/* ABOUT */
-#about{background:var(--bg)}
-.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
-.about-h{font-family:'Cormorant',serif;font-size:clamp(38px,4vw,58px);font-weight:700;line-height:1.12;letter-spacing:-.025em;color:#fff;margin-bottom:28px}
-.about-h em{font-style:italic;background:linear-gradient(135deg,var(--c1),var(--c2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.about-p{font-size:15.5px;color:var(--dim);line-height:1.85;font-weight:300;margin-bottom:18px}
-.about-p strong{color:#fff;font-weight:600}
-.pillars{margin-top:44px;border-top:1px solid rgba(255,255,255,.05)}
-.pillar{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.05);transition:all .3s}
-.pillar:hover{padding-left:10px}
-.pil-ic{width:44px;height:44px;border-radius:12px;background:rgba(0,255,163,.07);border:1px solid rgba(0,255,163,.14);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:all .3s}
-.pillar:hover .pil-ic{background:rgba(0,255,163,.14);box-shadow:0 0 20px rgba(0,255,163,.2)}
-.pil-t{font-weight:700;font-size:14.5px;color:#fff;margin-bottom:4px}
-.pil-d{font-size:13px;color:var(--muted);line-height:1.6;font-weight:300}
-.about-right{position:relative}
-.qcard{border-radius:28px;padding:56px 52px;background:linear-gradient(160deg,rgba(0,255,163,.08),rgba(0,212,255,.03) 60%,rgba(123,97,255,.04));border:1px solid rgba(0,255,163,.16);position:relative;overflow:hidden;box-shadow:0 0 120px rgba(0,255,163,.07),inset 0 1px 0 rgba(0,255,163,.1)}
-.qcard-h1{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,163,.1),transparent 70%);top:-100px;right:-100px}
-.qcard-h2{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.06),transparent 70%);bottom:-80px;left:-60px}
-.big-q{font-family:'Cormorant',serif;font-size:130px;color:rgba(0,255,163,.1);line-height:.7;margin-bottom:-10px;position:relative;z-index:1;filter:drop-shadow(0 0 20px rgba(0,255,163,.1))}
-blockquote{font-family:'Cormorant',serif;font-size:21px;font-style:italic;line-height:1.6;color:rgba(255,255,255,.85);margin-bottom:24px;position:relative;z-index:1;font-weight:400}
-.qby{font-size:12.5px;color:var(--muted);margin-bottom:40px;position:relative;z-index:1}
-.mbar{border-top:1px solid rgba(0,255,163,.1);padding-top:28px;position:relative;z-index:1}
-.mbar-l{font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
-.mbar-t{height:7px;background:rgba(255,255,255,.05);border-radius:100px;overflow:hidden;margin-bottom:10px}
-.mbar-f{height:100%;width:0;border-radius:100px;background:linear-gradient(90deg,#00ffa3,#00d4ff,#7b61ff);animation:mfill 2.5s 1.2s ease forwards;box-shadow:0 0 16px rgba(0,255,163,.5)}
-@keyframes mfill{to{width:90%}}
-.mbar-note{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted)}
-.mbar-note strong{color:#00ffa3}
-.float-b{position:absolute;top:-20px;right:28px;background:rgba(3,9,10,.9);border:1px solid rgba(0,255,163,.2);border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:12px;backdrop-filter:blur(20px);box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 32px rgba(0,255,163,.08)}
-.fb-e{font-size:24px}
-.fb-t{font-weight:700;font-size:14px;color:#fff}
-.fb-s{font-size:11px;color:var(--muted)}
+    .nlinks a:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, .06)
+    }
 
-/* AI TUTOR DEMO */
-#demo{background:linear-gradient(180deg,var(--bg),#050d10);position:relative;overflow:hidden}
-.demo-aura{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.08),transparent 68%);top:10%;left:50%;transform:translateX(-50%);pointer-events:none}
-.demo-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
-.demo-points{margin-top:34px;display:grid;gap:14px}
-.demo-point{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border:1px solid rgba(255,255,255,.06);border-radius:18px;background:rgba(255,255,255,.025);backdrop-filter:blur(10px);transition:all .3s}
-.demo-point:hover{border-color:rgba(0,255,163,.2);background:rgba(0,255,163,.04);transform:translateX(6px)}
-.demo-point span{width:28px;height:28px;border-radius:10px;background:linear-gradient(135deg,#00ffa3,#00d4ff);color:#001;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(0,255,163,.25);flex-shrink:0}
-.demo-point strong{display:block;font-size:14px;color:#fff;margin-bottom:3px}
-.demo-point p{font-size:12.8px;color:var(--muted);line-height:1.55;font-weight:300}
-.tutor-shell{position:relative;border-radius:32px;padding:1px;background:linear-gradient(135deg,rgba(0,255,163,.45),rgba(0,212,255,.18),rgba(123,97,255,.28));box-shadow:0 0 120px rgba(0,255,163,.08),0 40px 120px rgba(0,0,0,.55)}
-.tutor-card{border-radius:31px;background:rgba(3,9,10,.86);backdrop-filter:blur(28px);overflow:hidden;border:1px solid rgba(255,255,255,.05)}
-.tutor-top{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.025)}
-.tutor-id{display:flex;align-items:center;gap:12px}
-.tutor-orb{width:42px;height:42px;border-radius:16px;background:linear-gradient(135deg,#00ffa3,#00d4ff,#7b61ff);display:flex;align-items:center;justify-content:center;color:#000;font-weight:900;box-shadow:0 0 30px rgba(0,255,163,.35);animation:tutorPulse 3s ease-in-out infinite}
-@keyframes tutorPulse{0%,100%{filter:saturate(1);transform:scale(1)}50%{filter:saturate(1.35);transform:scale(1.04)}}
-.tutor-title{font-weight:800;font-size:14px;color:#fff}.tutor-sub{font-size:11.5px;color:var(--muted);margin-top:2px}.tutor-live{font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#00ffa3;background:rgba(0,255,163,.08);border:1px solid rgba(0,255,163,.18);padding:7px 12px;border-radius:100px;box-shadow:0 0 18px rgba(0,255,163,.12)}
-.chat-window{height:400px;padding:22px;overflow:auto;display:flex;flex-direction:column;gap:14px;scrollbar-width:thin;scrollbar-color:rgba(0,255,163,.3) transparent}
-.msg{max-width:88%;padding:14px 16px;border-radius:18px;font-size:13.5px;line-height:1.62;font-weight:300;animation:msgIn .35s ease both;white-space:pre-wrap}
-@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.msg.ai{align-self:flex-start;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.82);border-bottom-left-radius:6px}.msg.user{align-self:flex-end;background:linear-gradient(135deg,rgba(0,255,163,.95),rgba(0,212,255,.9));color:#001;border-bottom-right-radius:6px;font-weight:500}.msg.typing{display:flex;gap:5px;align-items:center;width:max-content}.msg.typing i{width:6px;height:6px;border-radius:50%;background:#00ffa3;opacity:.45;animation:dot 1s infinite}.msg.typing i:nth-child(2){animation-delay:.15s}.msg.typing i:nth-child(3){animation-delay:.3s}@keyframes dot{50%{opacity:1;transform:translateY(-3px)}}
-.quick-prompts{display:flex;gap:8px;flex-wrap:wrap;padding:0 20px 18px}
-.qp{background:rgba(0,255,163,.07);border:1px solid rgba(0,255,163,.15);color:#00ffa3;border-radius:100px;padding:8px 12px;font-size:11.5px;font-family:'Outfit',sans-serif;font-weight:700;cursor:pointer;transition:all .25s}
-.qp:hover{background:rgba(0,255,163,.13);transform:translateY(-2px);box-shadow:0 0 18px rgba(0,255,163,.14)}
-.tutor-form{display:flex;gap:10px;padding:18px 20px 20px;border-top:1px solid rgba(255,255,255,.06);background:rgba(255,255,255,.02)}
-.tutor-form input{flex:1;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);border-radius:100px;padding:14px 18px;color:#fff;font-family:'Outfit',sans-serif;font-size:13.5px;outline:none;transition:all .25s}.tutor-form input:focus{border-color:rgba(0,255,163,.35);box-shadow:0 0 0 4px rgba(0,255,163,.06)}.tutor-form input::placeholder{color:var(--muted)}
-.tutor-form button{border:none;border-radius:100px;padding:0 22px;background:linear-gradient(135deg,#00ffa3,#00d4ff);color:#001;font-weight:900;font-size:14px;font-family:'Outfit',sans-serif;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 0 28px rgba(0,255,163,.24)}.tutor-form button::before{content:'';position:absolute;inset:0;left:-100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .45s}.tutor-form button:hover::before{left:100%}
-.api-note{padding:0 22px 20px;font-size:11px;color:var(--muted);line-height:1.6}.api-note code{color:#00ffa3;background:rgba(0,255,163,.06);padding:2px 5px;border-radius:6px}
+    .nenroll {
+      background: var(--gold) !important;
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+      border-radius: 6px !important;
+      box-shadow: 0 4px 20px rgba(245, 200, 66, .3) !important
+    }
 
-/* CTA */
-#cta{padding:160px 32px;text-align:center;overflow:hidden;background:var(--bg2)}
-.cta-rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.cr{position:absolute;border-radius:50%;border:1px solid rgba(0,255,163,.05);animation:crExpand 8s ease-in-out infinite}
-.cr:nth-child(1){width:800px;height:800px}
-.cr:nth-child(2){width:560px;height:560px;border-color:rgba(0,255,163,.08);animation-delay:-2.6s}
-.cr:nth-child(3){width:340px;height:340px;border-color:rgba(0,255,163,.12);animation-delay:-5.2s}
-@keyframes crExpand{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.05);opacity:.3}}
-.cta-h{font-family:'Cormorant',serif;font-size:clamp(52px,7vw,90px);font-weight:700;line-height:1;letter-spacing:-.03em;color:#fff;margin-bottom:24px;position:relative;z-index:1}
-.cta-h span{background:linear-gradient(135deg,var(--c1),var(--c2),var(--c3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 40px rgba(0,255,163,.4))}
-.cta-p{font-size:18px;color:var(--dim);max-width:480px;margin:0 auto 52px;font-weight:300;line-height:1.75;position:relative;z-index:1}
-.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+    .nenroll:hover {
+      background: var(--gold2) !important;
+      transform: translateY(-1px) !important;
+      box-shadow: 0 8px 28px rgba(245, 200, 66, .4) !important
+    }
 
-/* FOOTER */
-footer{background:#020608;padding:80px 32px 40px;border-top:1px solid rgba(0,255,163,.06);position:relative;z-index:1}
-.fw{max-width:var(--max);margin:0 auto}
-.ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:64px}
-.fl-logo{display:flex;align-items:center;gap:10px;margin-bottom:20px;text-decoration:none}
-.fl-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#00ffa3,#00d4ff);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(0,255,163,.3)}
-.fl-mark svg{width:18px;height:18px}
-.fl-name{font-family:'Cormorant',serif;font-size:22px;font-weight:600;color:#fff}
-.fl-about{font-size:13.5px;color:var(--muted);line-height:1.7;max-width:260px;font-weight:300}
-.fc h4{font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,255,163,.6);margin-bottom:20px}
-.fc ul{list-style:none;display:flex;flex-direction:column;gap:12px}
-.fc a{font-size:13.5px;color:var(--muted);text-decoration:none;font-weight:300;transition:color .2s}
-.fc a:hover{color:#00ffa3}
-.fb2{border-top:1px solid rgba(255,255,255,.04);padding-top:28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.fb2 p{font-size:12.5px;color:var(--muted);font-weight:300}
-.fb2 a{color:#00ffa3;text-decoration:none}
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+      background: var(--navy)
+    }
 
-/* UTILS */
-@keyframes fadeUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
-.rv{opacity:0;transform:translateY(38px);transition:opacity .8s ease,transform .8s ease}
-.rv.on{opacity:1;transform:none}
-.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.32s}
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(30, 111, 255, .12), transparent), radial-gradient(ellipse 50% 50% at 20% 80%, rgba(245, 200, 66, .06), transparent);
+      pointer-events: none
+    }
 
-@media(max-width:960px){
-  nav{width:calc(100% - 32px);top:10px}
-  .nlinks{display:none}
-  section.s{padding:90px 20px}
-  .steps,.sub-grid,.test-grid,.plans,.about-wrap,.ft,.levels-grid{grid-template-columns:1fr}
-  .hero-nums{grid-template-columns:1fr 1fr}
-  #cta{padding:100px 20px}
-  .demo-wrap{grid-template-columns:1fr}
-  .paths-header{flex-direction:column;align-items:flex-start}
-}
-</style>
+    .hero-grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(30, 111, 255, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 111, 255, .04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none
+    }
+
+    .hero-content {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      z-index: 1
+    }
+
+    .hero-left {}
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      color: var(--gold);
+      margin-bottom: 40px;
+      animation: fadeUp .7s ease both
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--gold)
+    }
+
+    .hero-h {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(52px, 6vw, 84px);
+      line-height: 1.02;
+      letter-spacing: -.02em;
+      margin-bottom: 32px;
+      animation: fadeUp .7s .1s ease both
+    }
+
+    .hero-h .line1 {
+      display: block;
+      color: var(--white)
+    }
+
+    .hero-h .line2 {
+      display: block;
+      color: var(--blue2);
+      font-style: italic
+    }
+
+    .hero-h .line3 {
+      display: block;
+      color: var(--white)
+    }
+
+    .hero-gold-rule {
+      width: 80px;
+      height: 3px;
+      background: var(--gold);
+      margin: 36px 0;
+      animation: fadeUp .7s .2s ease both
+    }
+
+    .hero-p {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--dim);
+      line-height: 1.85;
+      max-width: 520px;
+      margin-bottom: 48px;
+      animation: fadeUp .7s .3s ease both
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp .7s .4s ease both
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 36px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(30, 111, 255, .4);
+      transition: all .25s
+    }
+
+    .btn-primary:hover {
+      background: var(--blue2);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(30, 111, 255, .5)
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 36px;
+      background: transparent;
+      border: 1.5px solid rgba(245, 200, 66, .4);
+      color: var(--gold);
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all .25s
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      background: rgba(245, 200, 66, .06);
+      transform: translateY(-2px)
+    }
+
+    .hero-right {
+      animation: fadeUp .7s .2s ease both
+    }
+
+    .hero-stats {
+      background: var(--navy2);
+      border: 1px solid rgba(30, 111, 255, .2);
+      border-radius: 16px;
+      padding: 36px;
+      display: grid;
+      gap: 0
+    }
+
+    .hs-item {
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .hs-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0
+    }
+
+    .hs-item:first-child {
+      padding-top: 0
+    }
+
+    .hs-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      color: var(--gold);
+      letter-spacing: -.02em
+    }
+
+    .hs-label {
+      font-size: 13px;
+      color: var(--dim);
+      font-weight: 400;
+      max-width: 160px;
+      text-align: right;
+      line-height: 1.4
+    }
+
+    .hero-badge {
+      margin-top: 20px;
+      background: rgba(30, 111, 255, .1);
+      border: 1px solid rgba(30, 111, 255, .25);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px
+    }
+
+    .hb-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--blue2);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--blue2);
+      flex-shrink: 0;
+      animation: pulse 2s infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .6;
+        transform: scale(.85)
+      }
+    }
+
+    .hb-text {
+      font-size: 13px;
+      color: var(--dim);
+      line-height: 1.5
+    }
+
+    .hb-text strong {
+      color: var(--white);
+      font-weight: 600
+    }
+
+    /* MARQUEE */
+    .mq-wrap {
+      background: var(--blue3);
+      border-top: 1px solid rgba(245, 200, 66, .15);
+      border-bottom: 1px solid rgba(245, 200, 66, .15);
+      overflow: hidden;
+      position: relative;
+      z-index: 1
+    }
+
+    .mq-track {
+      display: flex;
+      width: max-content;
+      animation: mqRoll 28s linear infinite;
+      padding: 14px 0
+    }
+
+    .mq-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 32px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .7);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap
+    }
+
+    .mq-sep {
+      color: var(--gold);
+      font-size: 16px
+    }
+
+    @keyframes mqRoll {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    /* SECTIONS */
+    section.s {
+      position: relative;
+      z-index: 1;
+      padding: 120px 48px
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      color: var(--blue2);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(30, 111, 255, .2)
+    }
+
+    .sec-h {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(38px, 4.5vw, 60px);
+      line-height: 1.08;
+      letter-spacing: -.02em;
+      color: var(--white);
+      margin-bottom: 20px
+    }
+
+    .sec-p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--dim);
+      max-width: 500px;
+      line-height: 1.85
+    }
+
+    /* HOW */
+    #how {
+      background: var(--navy2)
+    }
+
+    .how-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 72px
+    }
+
+    .how-left .sec-h {
+      max-width: 380px
+    }
+
+    .how-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0
+    }
+
+    .how-step {
+      display: flex;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      transition: all .3s
+    }
+
+    .how-step:last-child {
+      border-bottom: none
+    }
+
+    .how-step:hover {
+      padding-left: 8px
+    }
+
+    .hs-num-box {
+      width: 44px;
+      height: 44px;
+      background: rgba(30, 111, 255, .12);
+      border: 1px solid rgba(30, 111, 255, .25);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--blue2);
+      flex-shrink: 0;
+      transition: all .3s
+    }
+
+    .how-step:hover .hs-num-box {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white)
+    }
+
+    .hs-content h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px
+    }
+
+    .hs-content p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300
+    }
+
+    .how-right {
+      position: sticky;
+      top: 100px
+    }
+
+    .how-card {
+      background: var(--navy3);
+      border: 1px solid rgba(30, 111, 255, .2);
+      border-radius: 16px;
+      overflow: hidden
+    }
+
+    .hc-top {
+      background: linear-gradient(135deg, var(--blue3), var(--navy3));
+      padding: 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    .hc-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--white);
+      margin-bottom: 8px
+    }
+
+    .hc-sub {
+      font-size: 13px;
+      color: var(--dim)
+    }
+
+    .hc-body {
+      padding: 28px 32px
+    }
+
+    .hc-bar {
+      margin-bottom: 20px
+    }
+
+    .hc-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px
+    }
+
+    .hc-bar-label span:last-child {
+      color: var(--gold);
+      font-weight: 600
+    }
+
+    .hc-bar-track {
+      height: 6px;
+      background: rgba(255, 255, 255, .06);
+      border-radius: 100px;
+      overflow: hidden
+    }
+
+    .hc-bar-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--blue), var(--blue2));
+      animation: barFill 2s 1s ease forwards;
+      width: 0
+    }
+
+    .hc-bar-fill.gold {
+      background: linear-gradient(90deg, var(--gold2), var(--gold))
+    }
+
+    @keyframes barFill {
+      to {
+        width: var(--w)
+      }
+    }
+
+    .hc-note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, .06)
+    }
+
+    /* SUBJECTS */
+    #subjects {
+      background: var(--navy)
+    }
+
+    .sub-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+      gap: 24px
+    }
+
+    .sub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px
+    }
+
+    .sub-card {
+      background: var(--navy2);
+      border: 1px solid rgba(30, 111, 255, .12);
+      border-radius: var(--r);
+      padding: 32px 28px;
+      transition: all .35s;
+      cursor: default;
+      position: relative;
+      overflow: hidden
+    }
+
+    .sub-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(30, 111, 255, .06), transparent);
+      opacity: 0;
+      transition: opacity .35s
+    }
+
+    .sub-card:hover::before {
+      opacity: 1
+    }
+
+    .sub-card:hover {
+      border-color: rgba(30, 111, 255, .35);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .4)
+    }
+
+    .sc-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px
+    }
+
+    .sc-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(30, 111, 255, .1);
+      border: 1px solid rgba(30, 111, 255, .2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      transition: all .3s
+    }
+
+    .sub-card:hover .sc-icon {
+      background: rgba(30, 111, 255, .2);
+      border-color: rgba(30, 111, 255, .4)
+    }
+
+    .sc-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, .08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--muted);
+      transition: all .3s
+    }
+
+    .sub-card:hover .sc-arrow {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+      transform: rotate(45deg)
+    }
+
+    .sub-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--white);
+      margin-bottom: 10px
+    }
+
+    .sub-card p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+      margin-bottom: 20px
+    }
+
+    .sc-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px
+    }
+
+    .sc-pill {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--blue2);
+      background: rgba(30, 111, 255, .08);
+      border: 1px solid rgba(30, 111, 255, .18);
+      padding: 4px 10px;
+      border-radius: 100px
+    }
+
+    .sub-card.featured {
+      background: linear-gradient(135deg, var(--blue3), var(--navy3));
+      border-color: rgba(30, 111, 255, .4)
+    }
+
+    .sub-card.featured .sc-icon {
+      background: rgba(245, 200, 66, .1);
+      border-color: rgba(245, 200, 66, .3)
+    }
+
+    .sub-card.featured .sc-pill {
+      color: var(--gold);
+      background: rgba(245, 200, 66, .08);
+      border-color: rgba(245, 200, 66, .2)
+    }
+
+    /* PATHS */
+    #paths {
+      background: var(--navy2)
+    }
+
+    .paths-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 40px
+    }
+
+    .ptab {
+      border: 1.5px solid rgba(255, 255, 255, .1);
+      padding: 9px 20px;
+      border-radius: 100px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .25s;
+      background: transparent;
+      color: var(--muted)
+    }
+
+    .ptab.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(30, 111, 255, .3)
+    }
+
+    .ptab:hover:not(.active) {
+      border-color: rgba(30, 111, 255, .4);
+      color: var(--white)
+    }
+
+    .path-panel {
+      display: none
+    }
+
+    .path-panel.active {
+      display: block
+    }
+
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px
+    }
+
+    .level-card {
+      background: var(--navy);
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: var(--r);
+      overflow: hidden;
+      transition: all .35s
+    }
+
+    .level-card:hover {
+      border-color: rgba(30, 111, 255, .3);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .4)
+    }
+
+    .lc-top {
+      padding: 28px 28px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, .05)
+    }
+
+    .lc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 14px
+    }
+
+    .lc-badge.beg {
+      color: #4ade80;
+      background: rgba(74, 222, 128, .08);
+      border: 1px solid rgba(74, 222, 128, .2)
+    }
+
+    .lc-badge.int {
+      color: var(--blue2);
+      background: rgba(30, 111, 255, .08);
+      border: 1px solid rgba(30, 111, 255, .2)
+    }
+
+    .lc-badge.adv {
+      color: var(--gold);
+      background: rgba(245, 200, 66, .08);
+      border: 1px solid rgba(245, 200, 66, .2)
+    }
+
+    .lc-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--white);
+      margin-bottom: 6px
+    }
+
+    .lc-desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-weight: 300
+    }
+
+    .lc-body {
+      padding: 20px 28px 28px
+    }
+
+    .lc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column
+    }
+
+    .lc-list li {
+      font-size: 13px;
+      color: var(--dim);
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      font-weight: 300
+    }
+
+    .lc-list li:last-child {
+      border-bottom: none
+    }
+
+    .lc-list li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--blue2);
+      flex-shrink: 0
+    }
+
+    .lc-foot {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .lc-hrs {
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .lc-btn {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue2);
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    .lc-btn:hover {
+      color: var(--gold)
+    }
+
+    /* TESTIMONIALS */
+    #testi {
+      background: var(--navy)
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 64px
+    }
+
+    .tc {
+      background: var(--navy2);
+      border: 1px solid rgba(255, 255, 255, .06);
+      border-radius: var(--r);
+      padding: 32px;
+      transition: all .35s
+    }
+
+    .tc:hover {
+      border-color: rgba(30, 111, 255, .25);
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .4)
+    }
+
+    .tc-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 20px
+    }
+
+    .tc-star {
+      font-size: 14px;
+      color: var(--gold)
+    }
+
+    .tc-quote {
+      font-family: 'DM Serif Display', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--off);
+      line-height: 1.7;
+      margin-bottom: 24px
+    }
+
+    .tc-who {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .tc-av {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy);
+      flex-shrink: 0
+    }
+
+    .tc-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white)
+    }
+
+    .tc-role {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px
+    }
+
+    /* PRICING */
+    #pricing {
+      background: var(--navy2)
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 64px;
+      align-items: start
+    }
+
+    .plan {
+      background: var(--navy);
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: var(--r);
+      padding: 36px;
+      position: relative;
+      transition: all .35s
+    }
+
+    .plan:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .4)
+    }
+
+    .plan.feat {
+      background: var(--blue3);
+      border-color: rgba(30, 111, 255, .5);
+      box-shadow: 0 0 60px rgba(30, 111, 255, .1)
+    }
+
+    .plan.feat:hover {
+      box-shadow: 0 24px 80px rgba(30, 111, 255, .2)
+    }
+
+    .plan-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 5px 18px;
+      border-radius: 100px;
+      white-space: nowrap
+    }
+
+    .plan-name {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px
+    }
+
+    .plan.feat .plan-name {
+      color: var(--blue2)
+    }
+
+    .plan-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 60px;
+      color: var(--white);
+      line-height: 1;
+      display: flex;
+      align-items: flex-start;
+      gap: 4px
+    }
+
+    .plan-price sup {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      margin-top: 12px
+    }
+
+    .plan-period {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+      margin-bottom: 32px
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 36px
+    }
+
+    .plan-features li {
+      font-size: 13.5px;
+      color: var(--dim);
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 300
+    }
+
+    .plan-features li::before {
+      content: '✓';
+      font-size: 12px;
+      color: var(--blue2);
+      font-weight: 700;
+      flex-shrink: 0
+    }
+
+    .plan.feat .plan-features li::before {
+      color: var(--gold)
+    }
+
+    .plan-btn {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid rgba(255, 255, 255, .12);
+      color: var(--dim);
+      transition: all .25s
+    }
+
+    .plan-btn:hover {
+      border-color: var(--blue);
+      color: var(--blue2)
+    }
+
+    .plan-btn-main {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      background: var(--gold);
+      color: var(--navy);
+      transition: all .25s;
+      box-shadow: 0 4px 20px rgba(245, 200, 66, .3)
+    }
+
+    .plan-btn-main:hover {
+      background: var(--gold2);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(245, 200, 66, .4)
+    }
+
+    /* DEMO */
+    #demo {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden
+    }
+
+    .demo-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(30, 111, 255, .08), transparent);
+      pointer-events: none
+    }
+
+    .demo-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1
+    }
+
+    .demo-left .sec-h {
+      max-width: 400px
+    }
+
+    .demo-points {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px
+    }
+
+    .dp {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start
+    }
+
+    .dp-num {
+      width: 36px;
+      height: 36px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      flex-shrink: 0
+    }
+
+    .dp-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 4px
+    }
+
+    .dp-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 300
+    }
+
+    .tutor-shell {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(30, 111, 255, .25);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, .5), 0 0 60px rgba(30, 111, 255, .06)
+    }
+
+    .tutor-header {
+      background: var(--navy2);
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .th-left {
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .th-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      box-shadow: 0 0 20px rgba(30, 111, 255, .4)
+    }
+
+    .th-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--white)
+    }
+
+    .th-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px
+    }
+
+    .th-live {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: #4ade80;
+      background: rgba(74, 222, 128, .1);
+      border: 1px solid rgba(74, 222, 128, .2);
+      padding: 6px 12px;
+      border-radius: 100px
+    }
+
+    .chat-window {
+      height: 360px;
+      padding: 20px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: var(--navy);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(30, 111, 255, .3) transparent
+    }
+
+    .msg {
+      max-width: 85%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.65;
+      font-weight: 300;
+      animation: msgIn .3s ease both;
+      white-space: pre-wrap
+    }
+
+    @keyframes msgIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .msg.ai {
+      align-self: flex-start;
+      background: var(--navy2);
+      border: 1px solid rgba(255, 255, 255, .06);
+      color: var(--dim);
+      border-bottom-left-radius: 4px
+    }
+
+    .msg.user {
+      align-self: flex-end;
+      background: var(--blue);
+      color: var(--white);
+      border-bottom-right-radius: 4px;
+      font-weight: 500
+    }
+
+    .msg.typing {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      width: max-content
+    }
+
+    .msg.typing i {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue2);
+      opacity: .5;
+      animation: dot 1s infinite
+    }
+
+    .msg.typing i:nth-child(2) {
+      animation-delay: .15s
+    }
+
+    .msg.typing i:nth-child(3) {
+      animation-delay: .3s
+    }
+
+    @keyframes dot {
+      50% {
+        opacity: 1;
+        transform: translateY(-3px)
+      }
+    }
+
+    .quick-btns {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 12px 20px;
+      background: var(--navy)
+    }
+
+    .qb {
+      background: rgba(30, 111, 255, .08);
+      border: 1px solid rgba(30, 111, 255, .2);
+      color: var(--blue2);
+      border-radius: 100px;
+      padding: 7px 14px;
+      font-size: 11.5px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s
+    }
+
+    .qb:hover {
+      background: rgba(30, 111, 255, .16);
+      border-color: rgba(30, 111, 255, .4)
+    }
+
+    .tutor-input-row {
+      display: flex;
+      gap: 10px;
+      padding: 14px 20px;
+      background: var(--navy2);
+      border-top: 1px solid rgba(255, 255, 255, .05)
+    }
+
+    .tutor-input-row input {
+      flex: 1;
+      background: var(--navy);
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: border-color .2s
+    }
+
+    .tutor-input-row input:focus {
+      border-color: rgba(30, 111, 255, .4)
+    }
+
+    .tutor-input-row input::placeholder {
+      color: var(--muted)
+    }
+
+    .tutor-input-row button {
+      background: var(--blue);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      box-shadow: 0 4px 16px rgba(30, 111, 255, .3)
+    }
+
+    .tutor-input-row button:hover {
+      background: var(--blue2);
+      transform: translateY(-1px)
+    }
+
+    /* CTA */
+    #cta {
+      background: linear-gradient(135deg, var(--blue3) 0%, var(--navy) 60%);
+      padding: 140px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    #cta::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(245, 200, 66, .08), transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none
+    }
+
+    .cta-h {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(44px, 6vw, 72px);
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1
+    }
+
+    .cta-h em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .cta-p {
+      font-size: 17px;
+      color: var(--dim);
+      max-width: 460px;
+      margin: 0 auto 48px;
+      font-weight: 300;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1
+    }
+
+    /* FOOTER */
+    footer {
+      background: #060915;
+      padding: 72px 48px 36px;
+      border-top: 1px solid rgba(30, 111, 255, .1)
+    }
+
+    .fw {
+      max-width: var(--max);
+      margin: 0 auto
+    }
+
+    .ft {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 56px
+    }
+
+    .fl-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      margin-bottom: 18px
+    }
+
+    .fl-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--blue);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .fl-icon svg {
+      width: 18px;
+      height: 18px
+    }
+
+    .fl-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 19px;
+      color: var(--white)
+    }
+
+    .fl-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 240px;
+      font-weight: 300
+    }
+
+    .fc h4 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue2);
+      margin-bottom: 20px
+    }
+
+    .fc ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    .fc a {
+      font-size: 13.5px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color .2s
+    }
+
+    .fc a:hover {
+      color: var(--white)
+    }
+
+    .fb {
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px
+    }
+
+    .fb p {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 300
+    }
+
+    .fb a {
+      color: var(--gold);
+      text-decoration: none
+    }
+
+    /* UTILS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .rv {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease
+    }
+
+    .rv.on {
+      opacity: 1;
+      transform: none
+    }
+
+    .rv.d1 {
+      transition-delay: .1s
+    }
+
+    .rv.d2 {
+      transition-delay: .2s
+    }
+
+    .rv.d3 {
+      transition-delay: .3s
+    }
+
+    @media(max-width:960px) {
+      nav {
+        padding: 0 24px
+      }
+
+      .nlinks {
+        display: none
+      }
+
+      section.s {
+        padding: 80px 24px
+      }
+
+      .hero-content,
+      .how-inner,
+      .demo-wrap {
+        grid-template-columns: 1fr
+      }
+
+      .hero-right,
+      .how-right {
+        display: none
+      }
+
+      .sub-grid,
+      .testi-grid,
+      .plans,
+      .levels-grid,
+      .ft {
+        grid-template-columns: 1fr
+      }
+
+      #hero {
+        padding: 120px 24px 60px
+      }
+
+      #cta {
+        padding: 100px 24px
+      }
+
+      footer {
+        padding: 60px 24px 32px
+      }
+    }
+  </style>
 </head>
+
 <body>
-<canvas id="c"></canvas>
 
-<!-- NAV -->
-<nav>
-  <a href="#hero" class="nlogo">
-    <div class="nlogo-mark">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5Z" fill="#000" stroke="#000" stroke-width=".5"/></svg>
-    </div>
-    <span class="nlogo-text">Luminary Academy</span>
-  </a>
-  <ul class="nlinks">
-    <li><a href="#how">Method</a></li>
-    <li><a href="#subjects">Subjects</a></li>
-    <li><a href="#paths">Paths</a></li>
-    <li><a href="#demo">AI Tutor</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#pricing" class="nenroll">Enroll Free</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-orbs">
-    <div class="orb orb-a"></div>
-    <div class="orb orb-b"></div>
-    <div class="orb orb-c"></div>
-  </div>
-  <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <div class="hero-badge"><span class="badge-dot"></span>AI-Powered Online Academy · Beginner to Advanced</div>
-    <h1 class="hero-h">
-      <span class="w1">Master</span>
-      <span class="w2">Data & Code.</span>
-      <span class="w3">from your first line to real-world expertise.</span>
-    </h1>
-    <p class="hero-p">Luminary Academy delivers <strong>1-on-1 AI tutoring</strong> in Data Science, Python, Power BI, and Mathematics — with mastery-based paths that take you from complete beginner to industry-ready professional.</p>
-    <div class="hero-btns">
-      <a href="#paths" class="btn-shine">✦&nbsp; Explore Learning Paths</a>
-      <a href="#how" class="btn-ring">See How It Works →</a>
-    </div>
-    <div class="hero-nums">
-      <div class="hn"><div class="hn-v">4</div><div class="hn-l">Expert tracks: Data Science, Python, Power BI, Math</div></div>
-      <div class="hn"><div class="hn-v">3×</div><div class="hn-l">Learning levels — Beginner to Advanced</div></div>
-      <div class="hn"><div class="hn-v">90%</div><div class="hn-l">Mastery threshold before advancing</div></div>
-      <div class="hn"><div class="hn-v">1:1</div><div class="hn-l">Personalized AI tutor every session</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- MARQUEE -->
-<div class="mq">
-  <div class="mq-track">
-    <div class="mq-item"><span class="mq-dot">✦</span>Data Science</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Python Programming</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Power BI & DAX</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Mathematics</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Machine Learning</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Data Visualization</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Statistics & Probability</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>90% Mastery Standard</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Beginner to Advanced</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>AI-Powered Tutoring</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Data Science</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Python Programming</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Power BI & DAX</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Mathematics</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Machine Learning</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Data Visualization</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Statistics & Probability</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>90% Mastery Standard</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>Beginner to Advanced</div>
-    <div class="mq-item"><span class="mq-dot">✦</span>AI-Powered Tutoring</div>
-  </div>
-</div>
-
-<!-- HOW -->
-<section class="s" id="how">
-  <div class="how-glow"></div>
-  <div class="wrap">
-    <div class="rv"><span class="eyebrow">The Method</span></div>
-    <h2 class="sec-h rv d1">How Luminary Academy works</h2>
-    <p class="sec-p rv d2">Built on mastery-based pedagogy — gap-first, deeply personal. Every session leaves you genuinely more capable than when you started.</p>
-    <div class="steps rv d3">
-      <div class="step"><div class="step-border"></div><div class="step-n">01</div><span class="step-ico">🎯</span><h3>Diagnose First</h3><p>Your AI tutor asks one targeted question to locate exactly where you are in Data Science, Python, Power BI, or Mathematics — before teaching anything new.</p><div class="step-bar"></div></div>
-      <div class="step"><div class="step-border"></div><div class="step-n">02</div><span class="step-ico">🧭</span><h3>Guide, Don't Lecture</h3><p>You do the thinking. Your tutor asks before it tells, building real problem-solving intuition — not just rote recall of formulas or syntax.</p><div class="step-bar"></div></div>
-      <div class="step"><div class="step-border"></div><div class="step-n">03</div><span class="step-ico">🔍</span><h3>Fill the Gaps</h3><p>Shaky foundations collapse under pressure. We find the exact concept underneath your confusion and fix it — before moving on to the next level.</p><div class="step-bar"></div></div>
-      <div class="step"><div class="step-border"></div><div class="step-n">04</div><span class="step-ico">✦</span><h3>Prove Mastery</h3><p>You don't advance until you hit 90% clarity. Whether it's Python loops, DAX formulas, or regression — mastery at every step makes everything ahead easier.</p><div class="step-bar"></div></div>
-    </div>
-    <div class="alpha-bar rv">
-      <div class="ab-ico">🏫</div>
-      <div class="ab-txt"><strong>Inspired by the Alpha School / 2 Hour Learning model</strong> — the same mastery-based pedagogy producing 2.6× faster outcomes in research, now applied to Data Science and tech careers.</div>
-    </div>
-  </div>
-</section>
-
-<!-- SUBJECTS -->
-<section class="s" id="subjects">
-  <div class="wrap">
-    <div class="rv"><span class="eyebrow">Curriculum</span></div>
-    <h2 class="sec-h rv d1">Four tracks.<br>One <em style="font-family:'Cormorant',serif;font-style:italic;background:linear-gradient(135deg,#00ffa3,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">complete</em> data career.</h2>
-    <p class="sec-p rv d2">Everything you need to go from curious beginner to confident data professional — built around real-world skills that employers actually hire for.</p>
-    <div class="sub-grid rv d3">
-      <div class="sub-card">
-        <div class="sc-hue"></div>
-        <div class="sc-top"><div class="sc-ico">📊</div><div class="sc-btn">→</div></div>
-        <h3>Data Science</h3>
-        <p>From raw data to real insight. Learn to collect, clean, analyse, and communicate data — using Python, statistics, and ML to answer questions that matter.</p>
-        <div class="sc-tags"><span class="sc-tag">NumPy & Pandas</span><span class="sc-tag">EDA</span><span class="sc-tag">Machine Learning</span><span class="sc-tag">Statistics</span><span class="sc-tag">Scikit-learn</span></div>
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nlogo">
+      <div class="nlogo-mark">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5Z" fill="#fff" />
+        </svg>
       </div>
-      <div class="sub-card">
-        <div class="sc-hue"></div>
-        <div class="sc-top"><div class="sc-ico">🐍</div><div class="sc-btn">→</div></div>
-        <h3>Python Programming</h3>
-        <p>Plain-English logic before syntax. From your first print statement to advanced OOP and automation — with debugging skills that transfer to any project.</p>
-        <div class="sc-tags"><span class="sc-tag">Core Python</span><span class="sc-tag">OOP</span><span class="sc-tag">File Handling</span><span class="sc-tag">APIs</span><span class="sc-tag">Automation</span></div>
+      <span class="nlogo-text">Luminary Academy</span>
+    </a>
+    <ul class="nlinks">
+      <li><a href="#how">Method</a></li>
+      <li><a href="#subjects">Subjects</a></li>
+      <li><a href="#paths">Paths</a></li>
+      <li><a href="#demo">AI Tutor</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#pricing" class="nenroll">Enroll Free</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-tag">Luminary EdTech Ltd. · Est. 2026</div>
+        <h1 class="hero-h">
+          <span class="line1">Learn AI.</span>
+          <span class="line2">Build the future.</span>
+          <span class="line3">From anywhere.</span>
+        </h1>
+        <div class="hero-gold-rule"></div>
+        <p class="hero-p">10 expert tracks — from SQL and Python to Machine Learning, Deep Learning, Robotics, and AI.
+          Mastery-based, 1-on-1 AI tutoring that takes you from complete beginner to industry-ready professional.</p>
+        <div class="hero-btns">
+          <a href="#paths" class="btn-primary">Explore Learning Paths →</a>
+          <a href="#how" class="btn-secondary">How It Works</a>
+        </div>
       </div>
-      <div class="sub-card">
-        <div class="sc-hue"></div>
-        <div class="sc-top"><div class="sc-ico">📈</div><div class="sc-btn">→</div></div>
-        <h3>Power BI</h3>
-        <p>Turn spreadsheets into executive-ready dashboards. Master data modelling, DAX formulas, and interactive visuals that make decision-makers act.</p>
-        <div class="sc-tags"><span class="sc-tag">Data Modelling</span><span class="sc-tag">DAX</span><span class="sc-tag">Power Query</span><span class="sc-tag">Dashboards</span><span class="sc-tag">Reports</span></div>
-      </div>
-      <div class="sub-card">
-        <div class="sc-hue"></div>
-        <div class="sc-top"><div class="sc-ico">∑</div><div class="sc-btn">→</div></div>
-        <h3>Mathematics</h3>
-        <p>The engine under every data algorithm. Build solid foundations in statistics, linear algebra, and calculus — with intuition, not just formula memorisation.</p>
-        <div class="sc-tags"><span class="sc-tag">Statistics</span><span class="sc-tag">Probability</span><span class="sc-tag">Linear Algebra</span><span class="sc-tag">Calculus</span><span class="sc-tag">Discrete Math</span></div>
+      <div class="hero-right">
+        <div class="hero-stats">
+          <div class="hs-item">
+            <div class="hs-num">10</div>
+            <div class="hs-label">Expert tracks from SQL to AI & Robotics</div>
+          </div>
+          <div class="hs-item">
+            <div class="hs-num">3×</div>
+            <div class="hs-label">Faster learning than traditional courses</div>
+          </div>
+          <div class="hs-item">
+            <div class="hs-num">90%</div>
+            <div class="hs-label">Mastery standard before advancing</div>
+          </div>
+          <div class="hs-item">
+            <div class="hs-num">1:1</div>
+            <div class="hs-label">Personalised AI tutor every session</div>
+          </div>
+        </div>
+        <div class="hero-badge">
+          <div class="hb-dot"></div>
+          <div class="hb-text"><strong>AI Tutor is live</strong> — ask any question in Data Science, Python, SQL,
+            Machine Learning, Deep Learning, or Robotics</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- LEARNING PATHS -->
-<section class="s" id="paths">
-  <div class="paths-glow"></div>
-  <div class="wrap">
-    <div class="rv"><span class="eyebrow">Learning Paths</span></div>
-    <div class="paths-header rv d1">
-      <div>
-        <h2 class="sec-h" style="margin-bottom:8px">Your path, your pace.</h2>
-        <p class="sec-p">Three levels per track — pick where you are, not where you wish you were.</p>
+  <!-- MARQUEE -->
+  <div class="mq-wrap">
+    <div class="mq-track">
+      <div class="mq-item">Data Science <span class="mq-sep">·</span></div>
+      <div class="mq-item">Python Programming <span class="mq-sep">·</span></div>
+      <div class="mq-item">Machine Learning <span class="mq-sep">·</span></div>
+      <div class="mq-item">Deep Learning <span class="mq-sep">·</span></div>
+      <div class="mq-item">Artificial Intelligence <span class="mq-sep">·</span></div>
+      <div class="mq-item">SQL & Databases <span class="mq-sep">·</span></div>
+      <div class="mq-item">Power BI <span class="mq-sep">·</span></div>
+      <div class="mq-item">Robotics <span class="mq-sep">·</span></div>
+      <div class="mq-item">Mathematics <span class="mq-sep">·</span></div>
+      <div class="mq-item">Statistics & Probability <span class="mq-sep">·</span></div>
+      <div class="mq-item">Data Science <span class="mq-sep">·</span></div>
+      <div class="mq-item">Python Programming <span class="mq-sep">·</span></div>
+      <div class="mq-item">Machine Learning <span class="mq-sep">·</span></div>
+      <div class="mq-item">Deep Learning <span class="mq-sep">·</span></div>
+      <div class="mq-item">Artificial Intelligence <span class="mq-sep">·</span></div>
+      <div class="mq-item">SQL & Databases <span class="mq-sep">·</span></div>
+      <div class="mq-item">Power BI <span class="mq-sep">·</span></div>
+      <div class="mq-item">Robotics <span class="mq-sep">·</span></div>
+      <div class="mq-item">Mathematics <span class="mq-sep">·</span></div>
+      <div class="mq-item">Statistics & Probability <span class="mq-sep">·</span></div>
+    </div>
+  </div>
+
+  <!-- HOW -->
+  <section class="s" id="how">
+    <div class="wrap">
+      <div class="section-label rv">The Method</div>
+      <div class="how-inner">
+        <div class="how-left">
+          <h2 class="sec-h rv d1">How Luminary teaches differently</h2>
+          <p class="sec-p rv d2">Built on the same mastery-based model that produces 2.6× faster outcomes. Every session
+            starts where you actually are — not where the syllabus assumes.</p>
+          <div class="how-steps rv d3">
+            <div class="how-step">
+              <div class="hs-num-box">1</div>
+              <div class="hs-content">
+                <h3>Diagnose before teaching</h3>
+                <p>One targeted question reveals exactly what you know and where the gap is. No wasted time on what you
+                  already understand.</p>
+              </div>
+            </div>
+            <div class="how-step">
+              <div class="hs-num-box">2</div>
+              <div class="hs-content">
+                <h3>Guide, never lecture</h3>
+                <p>The tutor asks before it explains. You do the cognitive work — building intuition, not memorising
+                  answers.</p>
+              </div>
+            </div>
+            <div class="how-step">
+              <div class="hs-num-box">3</div>
+              <div class="hs-content">
+                <h3>Fix the root gap</h3>
+                <p>Confused by neural networks? The real gap might be in calculus. We find it and fix it before moving
+                  on.</p>
+              </div>
+            </div>
+            <div class="how-step">
+              <div class="hs-num-box">4</div>
+              <div class="hs-content">
+                <h3>Prove mastery, then advance</h3>
+                <p>90% clarity before the next level. You never carry a shaky foundation into harder material.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="how-right rv d2">
+          <div class="how-card">
+            <div class="hc-top">
+              <div class="hc-title">Student Progress</div>
+              <div class="hc-sub">Real mastery metrics — updated every session</div>
+            </div>
+            <div class="hc-body">
+              <div class="hc-bar">
+                <div class="hc-bar-label"><span>Python Fundamentals</span><span>94%</span></div>
+                <div class="hc-bar-track">
+                  <div class="hc-bar-fill" style="--w:94%"></div>
+                </div>
+              </div>
+              <div class="hc-bar">
+                <div class="hc-bar-label"><span>SQL Queries & Joins</span><span>87%</span></div>
+                <div class="hc-bar-track">
+                  <div class="hc-bar-fill" style="--w:87%"></div>
+                </div>
+              </div>
+              <div class="hc-bar">
+                <div class="hc-bar-label"><span>Machine Learning</span><span>72%</span></div>
+                <div class="hc-bar-track">
+                  <div class="hc-bar-fill gold" style="--w:72%"></div>
+                </div>
+              </div>
+              <div class="hc-bar">
+                <div class="hc-bar-label"><span>Statistics & Probability</span><span>68%</span></div>
+                <div class="hc-bar-track">
+                  <div class="hc-bar-fill gold" style="--w:68%"></div>
+                </div>
+              </div>
+              <div class="hc-note">Minimum 90% required to advance. The AI tutor focuses sessions on the weakest track
+                automatically.</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="paths-tabs">
-        <button class="ptab active" data-tab="ds">Data Science</button>
+    </div>
+  </section>
+
+  <!-- SUBJECTS -->
+  <section class="s" id="subjects">
+    <div class="wrap">
+      <div class="section-label rv">Curriculum</div>
+      <div class="sub-header rv d1">
+        <div>
+          <h2 class="sec-h" style="margin-bottom:12px">10 tracks. One complete AI career.</h2>
+          <p class="sec-p">From your first SQL query to deploying real AI agents — every track connects into a complete
+            career roadmap.</p>
+        </div>
+      </div>
+      <div class="sub-grid rv d2">
+        <div class="sub-card featured">
+          <div class="sc-head">
+            <div class="sc-icon">⚡</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>Artificial Intelligence</h3>
+          <p>From AI fundamentals to building autonomous agents. LLMs, prompt engineering, and production AI systems.
+          </p>
+          <div class="sc-pills"><span class="sc-pill">LLMs</span><span class="sc-pill">AI Agents</span><span
+              class="sc-pill">Prompt Engineering</span></div>
+        </div>
+        <div class="sub-card">
+          <div class="sc-head">
+            <div class="sc-icon">🧠</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>Deep Learning</h3>
+          <p>Build CNNs, RNNs, and Transformers from scratch. Understand backpropagation and train real neural networks.
+          </p>
+          <div class="sc-pills"><span class="sc-pill">TensorFlow</span><span class="sc-pill">PyTorch</span><span
+              class="sc-pill">Transformers</span></div>
+        </div>
+        <div class="sub-card">
+          <div class="sc-head">
+            <div class="sc-icon">🤖</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>Machine Learning</h3>
+          <p>Master the algorithms that power real-world AI — from regression to ensemble methods and model deployment.
+          </p>
+          <div class="sc-pills"><span class="sc-pill">Scikit-learn</span><span class="sc-pill">XGBoost</span><span
+              class="sc-pill">MLOps</span></div>
+        </div>
+        <div class="sub-card">
+          <div class="sc-head">
+            <div class="sc-icon">📊</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>Data Science</h3>
+          <p>Collect, clean, analyse, and communicate data. Build the full pipeline from raw CSV to business insight.
+          </p>
+          <div class="sc-pills"><span class="sc-pill">Pandas</span><span class="sc-pill">NumPy</span><span
+              class="sc-pill">EDA</span></div>
+        </div>
+        <div class="sub-card">
+          <div class="sc-head">
+            <div class="sc-icon">🐍</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>Python Programming</h3>
+          <p>Logic before syntax. From your first function to async programming, OOP, and production-grade Python.</p>
+          <div class="sc-pills"><span class="sc-pill">Core Python</span><span class="sc-pill">OOP</span><span
+              class="sc-pill">Automation</span></div>
+        </div>
+        <div class="sub-card">
+          <div class="sc-head">
+            <div class="sc-icon">🗄️</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>SQL & Databases</h3>
+          <p>Query, model, and optimise databases. The language every data career depends on — from basics to window
+            functions.</p>
+          <div class="sc-pills"><span class="sc-pill">SQL Queries</span><span class="sc-pill">Joins</span><span
+              class="sc-pill">Database Design</span></div>
+        </div>
+        <div class="sub-card">
+          <div class="sc-head">
+            <div class="sc-icon">🦾</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>Robotics</h3>
+          <p>Bring AI into the physical world. Program robots, sensors, and autonomous systems using Python and ROS.</p>
+          <div class="sc-pills"><span class="sc-pill">ROS</span><span class="sc-pill">Computer Vision</span><span
+              class="sc-pill">Sensors</span></div>
+        </div>
+        <div class="sub-card">
+          <div class="sc-head">
+            <div class="sc-icon">📈</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>Power BI</h3>
+          <p>Transform raw data into executive dashboards. Master DAX, data modelling, and interactive reports.</p>
+          <div class="sc-pills"><span class="sc-pill">DAX</span><span class="sc-pill">Power Query</span><span
+              class="sc-pill">Dashboards</span></div>
+        </div>
+        <div class="sub-card">
+          <div class="sc-head">
+            <div class="sc-icon">∑</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>Mathematics</h3>
+          <p>The engine under every AI algorithm. Linear algebra, calculus, and discrete mathematics — with real
+            intuition.</p>
+          <div class="sc-pills"><span class="sc-pill">Linear Algebra</span><span class="sc-pill">Calculus</span><span
+              class="sc-pill">Discrete Math</span></div>
+        </div>
+        <div class="sub-card">
+          <div class="sc-head">
+            <div class="sc-icon">📐</div>
+            <div class="sc-arrow">→</div>
+          </div>
+          <h3>Statistics & Probability</h3>
+          <p>The true foundation of all AI. Distributions, hypothesis testing, and Bayesian thinking — explained with
+            intuition.</p>
+          <div class="sc-pills"><span class="sc-pill">Distributions</span><span class="sc-pill">Hypothesis
+              Testing</span><span class="sc-pill">Bayes</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PATHS -->
+  <section class="s" id="paths">
+    <div class="wrap">
+      <div class="section-label rv">Learning Paths</div>
+      <h2 class="sec-h rv d1">Your path, your pace.</h2>
+      <p class="sec-p rv d2" style="margin-bottom:40px">Three levels per track. Pick where you are — not where you wish
+        you were.</p>
+      <div class="paths-tabs rv d3">
+        <button class="ptab active" data-tab="ai">Artificial Intelligence</button>
+        <button class="ptab" data-tab="ml">Machine Learning</button>
+        <button class="ptab" data-tab="dl">Deep Learning</button>
         <button class="ptab" data-tab="py">Python</button>
-        <button class="ptab" data-tab="pbi">Power BI</button>
-        <button class="ptab" data-tab="math">Mathematics</button>
+        <button class="ptab" data-tab="sql">SQL</button>
+        <button class="ptab" data-tab="ds">Data Science</button>
       </div>
-    </div>
 
-    <!-- DATA SCIENCE PATH -->
-    <div class="path-panel active rv d2" id="tab-ds">
-      <div class="levels-grid">
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge beg">● Beginner</div>
-            <div class="lc-title">Data Foundations</div>
-            <div class="lc-sub">No experience needed. Build the mindset and vocabulary of a data analyst from scratch.</div>
-          </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>What is data? Types and structures</li>
-              <li>Intro to spreadsheets & CSV files</li>
-              <li>Descriptive statistics (mean, median, mode)</li>
-              <li>Reading and making basic charts</li>
-              <li>Intro to Python for data (Pandas basics)</li>
-              <li>Your first exploratory data analysis</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~18 hrs</span>
-              <a href="#pricing" class="lc-start">Start free →</a>
+      <div class="path-panel active" id="tab-ai">
+        <div class="levels-grid">
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge beg">● Beginner</div>
+              <div class="lc-title">AI Fundamentals</div>
+              <div class="lc-desc">Understand AI from first principles — no jargon, no hype, just clear thinking.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>What is AI? History & types</li>
+                <li>AI vs ML vs Deep Learning</li>
+                <li>How language models work</li>
+                <li>Prompt engineering basics</li>
+                <li>AI tools for real work</li>
+                <li>Ethics & responsible AI</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~16 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
             </div>
           </div>
-        </div>
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge int">● Intermediate</div>
-            <div class="lc-title">Analysis & Modelling</div>
-            <div class="lc-sub">You know the basics. Now learn to extract real insight and build your first predictive models.</div>
-          </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Data cleaning with Pandas & NumPy</li>
-              <li>Advanced EDA techniques</li>
-              <li>Statistical hypothesis testing</li>
-              <li>Linear & logistic regression</li>
-              <li>Feature engineering essentials</li>
-              <li>Intro to Scikit-learn pipelines</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~24 hrs</span>
-              <a href="#pricing" class="lc-start">Start free →</a>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge int">● Intermediate</div>
+              <div class="lc-title">Building with AI</div>
+              <div class="lc-desc">Use AI APIs to build real intelligent applications from scratch.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Working with LLM APIs</li>
+                <li>Advanced prompt engineering</li>
+                <li>RAG — Retrieval Augmented Generation</li>
+                <li>Building AI pipelines</li>
+                <li>Fine-tuning language models</li>
+                <li>AI evaluation techniques</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~24 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
             </div>
           </div>
-        </div>
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge adv">● Advanced</div>
-            <div class="lc-title">Machine Learning & AI</div>
-            <div class="lc-sub">Production-grade skills. Build, tune, and deploy ML models that solve real business problems.</div>
-          </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Decision trees, Random Forest & XGBoost</li>
-              <li>Neural networks with TensorFlow/Keras</li>
-              <li>Natural language processing (NLP)</li>
-              <li>Model evaluation & cross-validation</li>
-              <li>MLOps & model deployment</li>
-              <li>End-to-end capstone project</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~30 hrs</span>
-              <a href="#pricing" class="lc-start">Unlock advanced →</a>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge adv">● Advanced</div>
+              <div class="lc-title">AI Agents & Systems</div>
+              <div class="lc-desc">Build autonomous AI agents and deploy production AI systems.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>AI agent architecture</li>
+                <li>Multi-agent systems</li>
+                <li>Tool use & function calling</li>
+                <li>Memory & planning in agents</li>
+                <li>Production AI deployment</li>
+                <li>Capstone: build an AI agent</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~30 hrs</span><a href="#pricing"
+                  class="lc-btn">Unlock →</a></div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- PYTHON PATH -->
-    <div class="path-panel rv d2" id="tab-py">
-      <div class="levels-grid">
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge beg">● Beginner</div>
-            <div class="lc-title">Python Essentials</div>
-            <div class="lc-sub">Write your first real Python programs without memorising syntax — just clear thinking first.</div>
+      <div class="path-panel" id="tab-ml">
+        <div class="levels-grid">
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge beg">● Beginner</div>
+              <div class="lc-title">ML Foundations</div>
+              <div class="lc-desc">Understand what machine learning is and build your first real models.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>What is Machine Learning?</li>
+                <li>Supervised vs unsupervised</li>
+                <li>Linear regression from scratch</li>
+                <li>Train/test splits & evaluation</li>
+                <li>Intro to Scikit-learn</li>
+                <li>Your first classification model</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~20 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
           </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Variables, data types & operators</li>
-              <li>Control flow: if/else & loops</li>
-              <li>Functions and scope</li>
-              <li>Lists, tuples, dicts & sets</li>
-              <li>String manipulation & formatting</li>
-              <li>Reading and writing files</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~15 hrs</span>
-              <a href="#pricing" class="lc-start">Start free →</a>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge int">● Intermediate</div>
+              <div class="lc-title">Core ML Algorithms</div>
+              <div class="lc-desc">Master the algorithms that power real-world ML systems.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Decision trees & Random Forest</li>
+                <li>Support Vector Machines</li>
+                <li>Clustering: K-Means & DBSCAN</li>
+                <li>Feature selection & engineering</li>
+                <li>Cross-validation & GridSearch</li>
+                <li>Model deployment basics</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~26 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
+          </div>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge adv">● Advanced</div>
+              <div class="lc-title">Production ML</div>
+              <div class="lc-desc">Build, tune, and deploy ML models that solve real business problems.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>XGBoost & LightGBM</li>
+                <li>Ensemble methods & stacking</li>
+                <li>Hyperparameter optimisation</li>
+                <li>MLOps & model monitoring</li>
+                <li>A/B testing for ML</li>
+                <li>End-to-end ML capstone</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~32 hrs</span><a href="#pricing"
+                  class="lc-btn">Unlock →</a></div>
             </div>
           </div>
         </div>
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge int">● Intermediate</div>
-            <div class="lc-title">Python in Practice</div>
-            <div class="lc-sub">Move beyond syntax into real problem-solving: OOP, error handling, and working with APIs.</div>
+      </div>
+
+      <div class="path-panel" id="tab-dl">
+        <div class="levels-grid">
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge beg">● Beginner</div>
+              <div class="lc-title">Neural Network Basics</div>
+              <div class="lc-desc">Understand how neural networks learn from first principles.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>What is a neural network?</li>
+                <li>Activation functions explained</li>
+                <li>Forward propagation</li>
+                <li>Loss functions & gradient descent</li>
+                <li>Backpropagation intuition</li>
+                <li>Build your first network</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~20 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
           </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Object-oriented programming (OOP)</li>
-              <li>Modules, packages & pip</li>
-              <li>Exception handling & debugging</li>
-              <li>Working with JSON & REST APIs</li>
-              <li>List comprehensions & generators</li>
-              <li>Unit testing with pytest</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~22 hrs</span>
-              <a href="#pricing" class="lc-start">Start free →</a>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge int">● Intermediate</div>
+              <div class="lc-title">Deep Learning in Practice</div>
+              <div class="lc-desc">Build CNNs, RNNs, and real deep learning applications.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Convolutional Neural Networks</li>
+                <li>Image classification projects</li>
+                <li>Recurrent Neural Networks</li>
+                <li>Transfer learning & fine-tuning</li>
+                <li>TensorFlow & Keras in depth</li>
+                <li>Data augmentation techniques</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~28 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
+          </div>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge adv">● Advanced</div>
+              <div class="lc-title">Transformers & GANs</div>
+              <div class="lc-desc">Attention mechanisms, Transformers, GANs, and production deployment.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Attention mechanisms explained</li>
+                <li>BERT, GPT architecture</li>
+                <li>Generative Adversarial Networks</li>
+                <li>PyTorch advanced patterns</li>
+                <li>Model compression & deployment</li>
+                <li>Capstone: build a vision system</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~34 hrs</span><a href="#pricing"
+                  class="lc-btn">Unlock →</a></div>
             </div>
           </div>
         </div>
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge adv">● Advanced</div>
-            <div class="lc-title">Python for Professionals</div>
-            <div class="lc-sub">Write production-quality Python: automation, data pipelines, concurrency, and clean architecture.</div>
+      </div>
+
+      <div class="path-panel" id="tab-py">
+        <div class="levels-grid">
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge beg">● Beginner</div>
+              <div class="lc-title">Python Essentials</div>
+              <div class="lc-desc">Write your first real programs — logic before syntax.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Variables, data types & operators</li>
+                <li>Control flow: if/else & loops</li>
+                <li>Functions and scope</li>
+                <li>Lists, tuples, dicts & sets</li>
+                <li>String manipulation</li>
+                <li>Reading and writing files</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~15 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
           </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Decorators, metaclasses & descriptors</li>
-              <li>Async programming with asyncio</li>
-              <li>Data pipelines with Python</li>
-              <li>Web scraping & automation</li>
-              <li>CLI tools & packaging</li>
-              <li>Capstone: build a data tool</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~28 hrs</span>
-              <a href="#pricing" class="lc-start">Unlock advanced →</a>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge int">● Intermediate</div>
+              <div class="lc-title">Python in Practice</div>
+              <div class="lc-desc">OOP, error handling, and working with real APIs.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Object-oriented programming</li>
+                <li>Modules, packages & pip</li>
+                <li>Exception handling & debugging</li>
+                <li>Working with JSON & REST APIs</li>
+                <li>List comprehensions & generators</li>
+                <li>Unit testing with pytest</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~22 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
+          </div>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge adv">● Advanced</div>
+              <div class="lc-title">Python for AI</div>
+              <div class="lc-desc">Production-quality Python for AI systems and data pipelines.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Decorators & metaclasses</li>
+                <li>Async programming with asyncio</li>
+                <li>Data pipelines with Python</li>
+                <li>Web scraping & automation</li>
+                <li>Python for ML & AI</li>
+                <li>Capstone: build an AI tool</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~28 hrs</span><a href="#pricing"
+                  class="lc-btn">Unlock →</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="path-panel" id="tab-sql">
+        <div class="levels-grid">
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge beg">● Beginner</div>
+              <div class="lc-title">SQL Basics</div>
+              <div class="lc-desc">Write your first queries and understand relational databases.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>What is a database?</li>
+                <li>SELECT, FROM, WHERE</li>
+                <li>Filtering and sorting data</li>
+                <li>Aggregate functions: COUNT, SUM</li>
+                <li>GROUP BY and HAVING</li>
+                <li>Your first real dataset query</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~12 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
+          </div>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge int">● Intermediate</div>
+              <div class="lc-title">SQL for Analysis</div>
+              <div class="lc-desc">Joins, subqueries, and window functions for real analysis work.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>INNER, LEFT, RIGHT joins</li>
+                <li>Subqueries & CTEs</li>
+                <li>Window functions: RANK, ROW_NUMBER</li>
+                <li>Date & string manipulation</li>
+                <li>Query optimisation basics</li>
+                <li>Real business analytics project</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~18 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
+          </div>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge adv">● Advanced</div>
+              <div class="lc-title">Database Engineering</div>
+              <div class="lc-desc">Design, optimise, and manage production databases.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Database design & normalisation</li>
+                <li>Indexes & query performance</li>
+                <li>Stored procedures & triggers</li>
+                <li>Transactions & ACID properties</li>
+                <li>SQL for data pipelines</li>
+                <li>Capstone: data warehouse design</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~24 hrs</span><a href="#pricing"
+                  class="lc-btn">Unlock →</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="path-panel" id="tab-ds">
+        <div class="levels-grid">
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge beg">● Beginner</div>
+              <div class="lc-title">Data Foundations</div>
+              <div class="lc-desc">Build the mindset and vocabulary of a data analyst from scratch.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>What is data? Types & structures</li>
+                <li>Intro to spreadsheets & CSV files</li>
+                <li>Descriptive statistics</li>
+                <li>Reading and making charts</li>
+                <li>Intro to Python for data</li>
+                <li>Your first EDA project</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~18 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
+          </div>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge int">● Intermediate</div>
+              <div class="lc-title">Analysis & Modelling</div>
+              <div class="lc-desc">Extract real insight and build your first predictive models.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Data cleaning with Pandas & NumPy</li>
+                <li>Advanced EDA techniques</li>
+                <li>Statistical hypothesis testing</li>
+                <li>Linear & logistic regression</li>
+                <li>Feature engineering</li>
+                <li>Scikit-learn pipelines</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~24 hrs</span><a href="#pricing"
+                  class="lc-btn">Start free →</a></div>
+            </div>
+          </div>
+          <div class="level-card">
+            <div class="lc-top">
+              <div class="lc-badge adv">● Advanced</div>
+              <div class="lc-title">Production Data Science</div>
+              <div class="lc-desc">Build and deploy production-grade data science solutions.</div>
+            </div>
+            <div class="lc-body">
+              <ul class="lc-list">
+                <li>Advanced ML pipelines</li>
+                <li>Time series analysis</li>
+                <li>Natural language processing</li>
+                <li>Model evaluation & tuning</li>
+                <li>MLOps & deployment</li>
+                <li>End-to-end capstone project</li>
+              </ul>
+              <div class="lc-foot"><span class="lc-hrs">6 modules · ~30 hrs</span><a href="#pricing"
+                  class="lc-btn">Unlock →</a></div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- POWER BI PATH -->
-    <div class="path-panel rv d2" id="tab-pbi">
-      <div class="levels-grid">
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge beg">● Beginner</div>
-            <div class="lc-title">Power BI Basics</div>
-            <div class="lc-sub">Go from raw Excel data to your first interactive dashboard — no coding required to start.</div>
-          </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Power BI interface & workspaces</li>
-              <li>Connecting to data sources</li>
-              <li>Power Query for data cleaning</li>
-              <li>Building your first report</li>
-              <li>Slicers, filters & cross-highlighting</li>
-              <li>Publishing and sharing dashboards</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~14 hrs</span>
-              <a href="#pricing" class="lc-start">Start free →</a>
+  <!-- TESTIMONIALS -->
+  <section class="s" id="testi">
+    <div class="wrap">
+      <div class="section-label rv">Results</div>
+      <h2 class="sec-h rv d1">Students who finally get it.</h2>
+      <p class="sec-p rv d2">Real outcomes from real learners — career changers and professionals building AI careers.
+      </p>
+      <div class="testi-grid rv d3">
+        <div class="tc">
+          <div class="tc-stars"><span class="tc-star">★</span><span class="tc-star">★</span><span
+              class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span></div>
+          <p class="tc-quote">I spent months stuck on Machine Learning before Luminary. The AI tutor found I didn't
+            understand gradient descent — fixed it in one session. Everything clicked after that.</p>
+          <div class="tc-who">
+            <div class="tc-av" style="background:var(--blue)">A</div>
+            <div>
+              <div class="tc-name">Amara D.</div>
+              <div class="tc-role">Career changer · Machine Learning</div>
             </div>
           </div>
         </div>
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge int">● Intermediate</div>
-            <div class="lc-title">Data Modelling & DAX</div>
-            <div class="lc-sub">Master the engine under the dashboard — relationships, star schemas, and your first DAX formulas.</div>
-          </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Star schema & data relationships</li>
-              <li>DAX fundamentals: CALCULATE, FILTER</li>
-              <li>Time intelligence functions</li>
-              <li>Measures vs. calculated columns</li>
-              <li>Advanced visualisations</li>
-              <li>Row-level security (RLS)</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~20 hrs</span>
-              <a href="#pricing" class="lc-start">Start free →</a>
+        <div class="tc">
+          <div class="tc-stars"><span class="tc-star">★</span><span class="tc-star">★</span><span
+              class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span></div>
+          <p class="tc-quote">My SQL went from basic selects to complex window functions. The tutor explained logic, not
+            just syntax. I was promoted to data analyst within 3 months.</p>
+          <div class="tc-who">
+            <div class="tc-av" style="background:var(--gold);color:var(--navy)">K</div>
+            <div>
+              <div class="tc-name">Khalid M.</div>
+              <div class="tc-role">Data Analyst · SQL & Power BI</div>
             </div>
           </div>
         </div>
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge adv">● Advanced</div>
-            <div class="lc-title">Enterprise BI Solutions</div>
-            <div class="lc-sub">Design scalable BI solutions, advanced DAX patterns, and integrate Python & AI visuals.</div>
-          </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Advanced DAX patterns & optimisation</li>
-              <li>Incremental refresh & large datasets</li>
-              <li>Python & R visuals in Power BI</li>
-              <li>Composite models & aggregations</li>
-              <li>Power BI embedded & APIs</li>
-              <li>Capstone: executive dashboard</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~26 hrs</span>
-              <a href="#pricing" class="lc-start">Unlock advanced →</a>
+        <div class="tc">
+          <div class="tc-stars"><span class="tc-star">★</span><span class="tc-star">★</span><span
+              class="tc-star">★</span><span class="tc-star">★</span><span class="tc-star">★</span></div>
+          <p class="tc-quote">Zero coding knowledge to building my own AI agent in 6 months. Luminary's mastery approach
+            meant I never moved on until I truly understood each concept.</p>
+          <div class="tc-who">
+            <div class="tc-av" style="background:#7b61ff">S</div>
+            <div>
+              <div class="tc-name">Sara O.</div>
+              <div class="tc-role">AI Engineer · Python & Deep Learning</div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- MATHEMATICS PATH -->
-    <div class="path-panel rv d2" id="tab-math">
-      <div class="levels-grid">
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge beg">● Beginner</div>
-            <div class="lc-title">Maths for Data</div>
-            <div class="lc-sub">Build the number intuition that every data professional needs — explained from first principles, not memorisation.</div>
+  <!-- PRICING -->
+  <section class="s" id="pricing">
+    <div class="wrap">
+      <div class="section-label rv">Plans</div>
+      <h2 class="sec-h rv d1">Simple, honest pricing.</h2>
+      <p class="sec-p rv d2" style="margin-bottom:0">No hidden fees. Cancel anytime. All 10 tracks included in every
+        plan.</p>
+      <div class="plans rv d3">
+        <div class="plan">
+          <div class="plan-name">Explorer</div>
+          <div class="plan-price"><sup>$</sup>0</div>
+          <div class="plan-period">Free forever</div>
+          <ul class="plan-features">
+            <li>5 tutoring sessions per month</li>
+            <li>All 10 tracks access</li>
+            <li>Beginner modules only</li>
+            <li>Progress tracking</li>
+          </ul><a href="#" class="plan-btn">Get Started Free</a>
+        </div>
+        <div class="plan feat">
+          <div class="plan-badge">Most Popular</div>
+          <div class="plan-name">Scholar</div>
+          <div class="plan-price"><sup>$</sup>29</div>
+          <div class="plan-period">per month · cancel anytime</div>
+          <ul class="plan-features">
+            <li>Unlimited tutoring sessions</li>
+            <li>All 10 tracks, all 3 levels</li>
+            <li>Deep knowledge gap analysis</li>
+            <li>Personalised learning path</li>
+            <li>Session summaries & recaps</li>
+            <li>Priority AI response time</li>
+          </ul><a href="#" class="plan-btn-main">Start 7-Day Free Trial</a>
+        </div>
+        <div class="plan">
+          <div class="plan-name">Team</div>
+          <div class="plan-price"><sup>$</sup>79</div>
+          <div class="plan-period">per month · up to 5 learners</div>
+          <ul class="plan-features">
+            <li>Everything in Scholar</li>
+            <li>Up to 5 learner profiles</li>
+            <li>Manager progress dashboard</li>
+            <li>Weekly learning reports</li>
+            <li>Team skill gap analysis</li>
+          </ul><a href="#" class="plan-btn">Get Team Plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO -->
+  <section class="s" id="demo">
+    <div class="demo-bg"></div>
+    <div class="wrap demo-wrap">
+      <div class="demo-left rv">
+        <div class="section-label">Live AI Tutor</div>
+        <h2 class="sec-h" style="max-width:380px;margin-top:16px">Try it right now.</h2>
+        <p class="sec-p" style="margin-bottom:0">This is the real AI tutor — mastery-based, diagnostic, expert across
+          all 10 tracks. No login required.</p>
+        <div class="demo-points">
+          <div class="dp">
+            <div class="dp-num">1</div>
+            <div>
+              <div class="dp-title">Diagnose first</div>
+              <div class="dp-desc">The tutor finds where you are before teaching anything.</div>
+            </div>
           </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Number systems & arithmetic logic</li>
-              <li>Algebra & equation solving</li>
-              <li>Functions, graphs & coordinates</li>
-              <li>Intro to statistics: mean, variance</li>
-              <li>Intro to probability</li>
-              <li>Reading mathematical notation</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~16 hrs</span>
-              <a href="#pricing" class="lc-start">Start free →</a>
+          <div class="dp">
+            <div class="dp-num">2</div>
+            <div>
+              <div class="dp-title">10 tracks, one tutor</div>
+              <div class="dp-desc">Ask about SQL, Python, ML, AI, Deep Learning, or Robotics.</div>
+            </div>
+          </div>
+          <div class="dp">
+            <div class="dp-num">3</div>
+            <div>
+              <div class="dp-title">Secure backend</div>
+              <div class="dp-desc">Powered by Claude — API key never touches your browser.</div>
             </div>
           </div>
         </div>
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge int">● Intermediate</div>
-            <div class="lc-title">Stats & Linear Algebra</div>
-            <div class="lc-sub">The mathematics that powers machine learning — vectors, matrices, distributions, and hypothesis testing.</div>
-          </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Vectors & matrix operations</li>
-              <li>Eigenvalues & eigenvectors</li>
-              <li>Probability distributions</li>
-              <li>Hypothesis testing & p-values</li>
-              <li>Correlation & regression maths</li>
-              <li>Bayes' theorem applied</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~24 hrs</span>
-              <a href="#pricing" class="lc-start">Start free →</a>
+      </div>
+      <div class="rv d2">
+        <div class="tutor-shell">
+          <div class="tutor-header">
+            <div class="th-left">
+              <div class="th-icon">✦</div>
+              <div>
+                <div class="th-name">Luminary AI Tutor</div>
+                <div class="th-sub">10 tracks · Beginner to Advanced</div>
+              </div>
             </div>
+            <div class="th-live">Live</div>
           </div>
-        </div>
-        <div class="level-card">
-          <div class="lc-head">
-            <div class="lc-badge adv">● Advanced</div>
-            <div class="lc-title">Calculus & Optimisation</div>
-            <div class="lc-sub">Understand how neural networks actually learn — gradients, backpropagation, and mathematical optimisation.</div>
+          <div class="chat-window" id="chatWindow">
+            <div class="msg ai">Hello! I'm your Luminary tutor — expert across all 10 tracks. Whether you're starting
+              with SQL or building deep learning models, I diagnose first and guide you to genuine mastery. What would
+              you like to learn today?</div>
           </div>
-          <div class="lc-body">
-            <ul class="lc-modules">
-              <li>Differential calculus & derivatives</li>
-              <li>Partial derivatives & gradients</li>
-              <li>Gradient descent from scratch</li>
-              <li>Chain rule & backpropagation</li>
-              <li>Convex optimisation</li>
-              <li>Information theory basics</li>
-            </ul>
-            <div class="lc-foot">
-              <span class="lc-lessons">6 modules · ~28 hrs</span>
-              <a href="#pricing" class="lc-start">Unlock advanced →</a>
-            </div>
+          <div class="quick-btns">
+            <button class="qb" data-q="What is gradient descent and why does every AI use it?">Gradient descent</button>
+            <button class="qb" data-q="Explain SQL joins — when do I use LEFT vs INNER?">SQL JOINs</button>
+            <button class="qb" data-q="What is a neural network? I'm a complete beginner.">Neural networks</button>
+            <button class="qb" data-q="What is the difference between Machine Learning and Deep Learning?">ML vs Deep
+              Learning</button>
+          </div>
+          <div class="tutor-input-row">
+            <input id="tutorInput" autocomplete="off" placeholder="Ask about any of the 10 tracks...">
+            <button id="tutorSend">Ask</button>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="s" id="testi">
-  <div class="wrap">
-    <div class="rv"><span class="eyebrow">Results</span></div>
-    <h2 class="sec-h rv d1">Students who finally <em style="font-family:'Cormorant',serif;font-style:italic;background:linear-gradient(135deg,#00ffa3,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">get it.</em></h2>
-    <p class="sec-p rv d2">Real outcomes from real learners — career changers, students, and professionals upskilling in data.</p>
-    <div class="test-grid rv d3">
-      <div class="tc"><div class="tc-glow"></div><div class="tc-stars"><span class="ts">★</span><span class="ts">★</span><span class="ts">★</span><span class="ts">★</span><span class="ts">★</span></div><p class="tc-q">I spent months stuck on Pandas before Luminary. The AI tutor found I didn't actually understand indexing — fixed that in one session. Everything clicked after.</p><div class="tc-who"><div class="tc-av" style="background:linear-gradient(135deg,#00ffa3,#00d4ff)">A</div><div><div class="tc-name">Amara D.</div><div class="tc-role">Career changer · Data Science</div></div></div></div>
-      <div class="tc"><div class="tc-glow"></div><div class="tc-stars"><span class="ts">★</span><span class="ts">★</span><span class="ts">★</span><span class="ts">★</span><span class="ts">★</span></div><p class="tc-q">My Power BI dashboards went from flat tables to executive-ready visuals. The DAX modules explained the logic, not just the formula. That made all the difference.</p><div class="tc-who"><div class="tc-av" style="background:linear-gradient(135deg,#ffd166,#f59e0b)">K</div><div><div class="tc-name">Khalid M.</div><div class="tc-role">Business analyst · Power BI</div></div></div></div>
-      <div class="tc"><div class="tc-glow"></div><div class="tc-stars"><span class="ts">★</span><span class="ts">★</span><span class="ts">★</span><span class="ts">★</span><span class="ts">★</span></div><p class="tc-q">I failed linear algebra at university and avoided maths for years. The Luminary tutor rebuilt my intuition from scratch. I now build neural networks comfortably.</p><div class="tc-who"><div class="tc-av" style="background:linear-gradient(135deg,#7b61ff,#c084fc)">S</div><div><div class="tc-name">Sara O.</div><div class="tc-role">ML engineer · Mathematics</div></div></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section class="s" id="pricing">
-  <div class="wrap">
-    <div class="rv"><span class="eyebrow">Plans</span></div>
-    <h2 class="sec-h rv d1">Simple, honest pricing.</h2>
-    <p class="sec-p rv d2">No hidden fees. Cancel anytime. Every plan includes full AI tutoring across all four academy tracks.</p>
-    <div class="plans rv d3">
-      <div class="plan"><div class="plan-tier">Explorer</div><div class="plan-cost"><sup>$</sup>0</div><div class="plan-mo">Free forever</div><ul class="plan-feats"><li>5 tutoring sessions / month</li><li>All 4 tracks: DS, Python, Power BI, Math</li><li>Beginner modules only</li><li>Progress tracking</li></ul><a href="#" class="plan-btn">Get Started Free</a></div>
-      <div class="plan feat"><div class="plan-crown">Most Popular</div><div class="plan-tier">Scholar</div><div class="plan-cost"><sup>$</sup>29</div><div class="plan-mo">per month · cancel anytime</div><ul class="plan-feats"><li>Unlimited tutoring sessions</li><li>All 4 tracks, all 3 levels</li><li>Deep knowledge gap analysis</li><li>Personalised learning path</li><li>Session summaries & recaps</li><li>Priority AI response time</li></ul><a href="#" class="plan-btn-g">Start 7-Day Free Trial →</a></div>
-      <div class="plan"><div class="plan-tier">Team</div><div class="plan-cost"><sup>$</sup>79</div><div class="plan-mo">per month · up to 5 learners</div><ul class="plan-feats"><li>Everything in Scholar</li><li>Up to 5 learner profiles</li><li>Manager progress dashboard</li><li>Weekly learning reports</li><li>Team skill gap analysis</li></ul><a href="#" class="plan-btn">Get Team Plan</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="s" id="about">
-  <div class="wrap">
-    <div class="about-wrap">
-      <div class="rv">
-        <span class="eyebrow">Our Philosophy</span>
-        <h2 class="about-h">Built on the science of how people <em>actually</em> learn data.</h2>
-        <p class="about-p">Luminary Academy exists because of a simple truth: <strong>students don't fail data courses because they're not smart — they fail because something underneath wasn't solid.</strong></p>
-        <p class="about-p">We apply the Alpha School's mastery approach to data careers — gap-first, personalised, and human-paced. Students learn 2.6× faster when instruction adapts to them, not the other way around.</p>
-        <div class="pillars">
-          <div class="pillar"><div class="pil-ic">🎯</div><div><div class="pil-t">Mastery before advancement</div><div class="pil-d">90% clarity before moving on. No gaps that compound into bigger confusion later.</div></div></div>
-          <div class="pillar"><div class="pil-ic">🧭</div><div><div class="pil-t">Guide, don't lecture</div><div class="pil-d">You do the cognitive work. The AI asks, prompts, and coaches — not copy-pastes explanations.</div></div></div>
-          <div class="pillar"><div class="pil-ic">💡</div><div><div class="pil-t">Career-ready confidence</div><div class="pil-d">High standards + genuine support = professionals who don't just pass — they perform.</div></div></div>
-        </div>
-      </div>
-      <div class="about-right rv d2">
-        <div class="float-b"><div class="fb-e">📈</div><div><div class="fb-t">2.6× Faster Learning</div><div class="fb-s">vs. traditional data courses</div></div></div>
-        <div class="qcard">
-          <div class="qcard-h1"></div><div class="qcard-h2"></div>
-          <div class="big-q">"</div>
-          <blockquote>We had a one-to-one mastery-based tutoring system once before. It was called having Aristotle as your tutor. Now everyone can have that.</blockquote>
-          <div class="qby">Inspired by MacKenzie Price, Founder — Alpha School</div>
-          <div class="mbar">
-            <div class="mbar-l">Student mastery threshold</div>
-            <div class="mbar-t"><div class="mbar-f"></div></div>
-            <div class="mbar-note"><span>0%</span><strong>90% — Luminary standard</strong><span>100%</span></div>
-          </div>
-        </div>
+  <!-- CTA -->
+  <section id="cta">
+    <div class="wrap">
+      <h2 class="cta-h rv">Ready to build your<br><em>AI career?</em></h2>
+      <p class="cta-p rv d1">Start with any of the 10 tracks. Your first 5 sessions are completely free. No card needed.
+      </p>
+      <div class="cta-btns rv d2">
+        <a href="#pricing" class="btn-primary">Start Free Today →</a>
+        <a href="#paths" class="btn-secondary">View Learning Paths</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- AI TUTOR DEMO -->
-<section class="s" id="demo">
-  <div class="demo-aura"></div>
-  <div class="wrap demo-wrap">
-    <div class="rv">
-      <span class="eyebrow">Live AI Tutor</span>
-      <h2 class="sec-h">Try the Luminary tutor<br><em style="font-family:'Cormorant',serif;font-style:italic;background:linear-gradient(135deg,#00ffa3,#00d4ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">right now.</em></h2>
-      <p class="sec-p">This is the real AI tutor — mastery-based, diagnostic, and subject-aware. Ask about any of the four tracks.</p>
-      <div class="demo-points">
-        <div class="demo-point"><span>1</span><div><strong>Gap-first diagnosis</strong><p>The tutor starts by finding what you already know — then builds from there.</p></div></div>
-        <div class="demo-point"><span>2</span><div><strong>Subject-aware responses</strong><p>Whether it's Python syntax, Power BI DAX, or calculus — it adapts.</p></div></div>
-        <div class="demo-point"><span>3</span><div><strong>Claude-powered backend</strong><p>Every response goes through your secure server — API key never touches the browser.</p></div></div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="fw">
+      <div class="ft">
+        <div>
+          <a href="#hero" class="fl-logo">
+            <div class="fl-icon"><svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5Z" fill="#fff" />
+              </svg></div>
+            <span class="fl-name">Luminary Academy</span>
+          </a>
+          <p class="fl-desc">AI-powered mastery learning across 10 tracks — from SQL to Robotics. Beginner to Advanced,
+            worldwide.</p>
+        </div>
+        <div class="fc">
+          <h4>AI Tracks</h4>
+          <ul>
+            <li><a href="#subjects">Artificial Intelligence</a></li>
+            <li><a href="#subjects">Machine Learning</a></li>
+            <li><a href="#subjects">Deep Learning</a></li>
+            <li><a href="#subjects">Robotics</a></li>
+            <li><a href="#subjects">Statistics & Probability</a></li>
+          </ul>
+        </div>
+        <div class="fc">
+          <h4>Data Tracks</h4>
+          <ul>
+            <li><a href="#subjects">Data Science</a></li>
+            <li><a href="#subjects">Python Programming</a></li>
+            <li><a href="#subjects">SQL & Databases</a></li>
+            <li><a href="#subjects">Power BI</a></li>
+            <li><a href="#subjects">Mathematics</a></li>
+          </ul>
+        </div>
+        <div class="fc">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#how">Our Method</a></li>
+            <li><a href="#testi">Results</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#demo">AI Tutor</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="fb">
+        <p>© 2026 <a href="#">Luminary EdTech Ltd.</a> All rights reserved.</p>
+        <p>Built on the mastery-based learning model · Powered by Claude AI</p>
       </div>
     </div>
-    <div class="tutor-shell rv d2">
-      <div class="tutor-card">
-        <div class="tutor-top">
-          <div class="tutor-id"><div class="tutor-orb">✦</div><div><div class="tutor-title">Luminary AI Tutor</div><div class="tutor-sub">Data Science · Python · Power BI · Mathematics</div></div></div>
-          <div class="tutor-live">Live</div>
-        </div>
-        <div class="chat-window" id="chatWindow">
-          <div class="msg ai">Hi! I'm your Luminary tutor. I can help you with Data Science, Python, Power BI, or Mathematics — at any level. Ask me anything, or try one of the quick prompts below.</div>
-        </div>
-        <div class="quick-prompts">
-          <button class="qp" data-q="Explain what a Pandas DataFrame is — I'm a complete beginner.">Pandas DataFrame</button>
-          <button class="qp" data-q="What is DAX in Power BI and when would I use CALCULATE?">DAX & CALCULATE</button>
-          <button class="qp" data-q="Help me understand what gradient descent is — no maths jargon please.">Gradient descent</button>
-          <button class="qp" data-q="I wrote a Python for loop but it's not doing what I expect. How do I debug it?">Debug Python loop</button>
-        </div>
-        <form class="tutor-form" id="tutorForm">
-          <input id="tutorInput" autocomplete="off" placeholder="Ask about Data Science, Python, Power BI, or Maths...">
-          <button type="submit">Ask</button>
-        </form>
-        <div class="api-note">Connect this form to <code>/api/tutor</code> on your server. Claude responds from the backend — your API key stays secure.</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </footer>
 
-<!-- CTA -->
-<section class="s" id="cta">
-  <div class="cta-rings"><div class="cr"></div><div class="cr"></div><div class="cr"></div></div>
-  <div class="wrap" style="text-align:center">
-    <h2 class="cta-h rv">Ready to become a<br><span>data professional?</span></h2>
-    <p class="cta-p rv d1">Start with any track — Data Science, Python, Power BI, or Mathematics. Your first 5 sessions are completely free. No card needed.</p>
-    <div class="cta-btns rv d2">
-      <a href="#pricing" class="btn-shine">✦&nbsp; Start Free Today</a>
-      <a href="#paths" class="btn-ring">View Learning Paths →</a>
-    </div>
-  </div>
-</section>
+  <script>
+    // SCROLL REVEAL
+    const rvEls = document.querySelectorAll('.rv');
+    const ob = new IntersectionObserver(entries => { entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('on'), i * 80) }); }, { threshold: .08 });
+    rvEls.forEach(el => ob.observe(el));
 
-<!-- FOOTER -->
-<footer>
-  <div class="fw">
-    <div class="ft">
-      <div>
-        <a href="#hero" class="fl-logo">
-          <div class="fl-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5Z" fill="#000"/></svg></div>
-          <span class="fl-name">Luminary Academy</span>
-        </a>
-        <p class="fl-about">Mastery-based AI tutoring for data careers. Data Science, Python, Power BI, and Mathematics — from beginner to advanced.</p>
-      </div>
-      <div class="fc"><h4>Tracks</h4><ul><li><a href="#subjects">Data Science</a></li><li><a href="#subjects">Python Programming</a></li><li><a href="#subjects">Power BI</a></li><li><a href="#subjects">Mathematics</a></li></ul></div>
-      <div class="fc"><h4>Company</h4><ul><li><a href="#about">About</a></li><li><a href="#how">Our Method</a></li><li><a href="#testi">Results</a></li><li><a href="#demo">AI Tutor</a></li></ul></div>
-      <div class="fc"><h4>Get Started</h4><ul><li><a href="#pricing">Pricing</a></li><li><a href="#paths">Learning Paths</a></li><li><a href="#pricing">Free Trial</a></li><li><a href="#">Contact</a></li></ul></div>
-    </div>
-    <div class="fb2">
-      <p>© 2026 Luminary Academy. All rights reserved.</p>
-      <p>Built on the <a href="#">Alpha School / 2 Hour Learning</a> mastery model.</p>
-    </div>
-  </div>
-</footer>
-
-<script>
-// ── PARTICLE NETWORK ──
-const cv=document.getElementById('c'),cx=cv.getContext('2d');
-let W,H;
-const resize=()=>{W=cv.width=window.innerWidth;H=cv.height=window.innerHeight};
-resize();window.addEventListener('resize',resize);
-let mouse={x:W/2,y:H/2};
-window.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
-const COLS=['0,255,163','0,212,255','123,97,255','255,107,107'];
-const pts=[];
-for(let i=0;i<100;i++){
-  pts.push({x:Math.random()*3000,y:Math.random()*3000,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.8+.4,a:Math.random()*.4+.08,c:COLS[Math.floor(Math.random()*COLS.length)]});
-}
-function frame(){
-  cx.clearRect(0,0,W,H);
-  const mg=cx.createRadialGradient(mouse.x,mouse.y,0,mouse.x,mouse.y,300);
-  mg.addColorStop(0,'rgba(0,255,163,0.04)');mg.addColorStop(1,'transparent');
-  cx.fillStyle=mg;cx.fillRect(0,0,W,H);
-  for(let i=0;i<pts.length;i++){
-    pts[i].x+=pts[i].vx;pts[i].y+=pts[i].vy;
-    if(pts[i].x<0)pts[i].x=W;if(pts[i].x>W)pts[i].x=0;
-    if(pts[i].y<0)pts[i].y=H;if(pts[i].y>H)pts[i].y=0;
-    for(let j=i+1;j<pts.length;j++){
-      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
-      if(d<140){cx.beginPath();cx.moveTo(pts[i].x,pts[i].y);cx.lineTo(pts[j].x,pts[j].y);cx.strokeStyle=`rgba(0,255,163,${.055*(1-d/140)})`;cx.lineWidth=.6;cx.stroke();}
-    }
-    cx.beginPath();cx.arc(pts[i].x,pts[i].y,pts[i].r,0,Math.PI*2);cx.fillStyle=`rgba(${pts[i].c},${pts[i].a})`;cx.fill();
-  }
-  requestAnimationFrame(frame);
-}
-frame();
-
-// ── SCROLL REVEAL ──
-const rvEls=document.querySelectorAll('.rv');
-const ob=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('on'),i*90)});},{threshold:.08});
-rvEls.forEach(el=>ob.observe(el));
-
-// ── 3D TILT ──
-document.querySelectorAll('.sub-card,.tc,.plan,.step,.level-card').forEach(el=>{
-  el.addEventListener('mousemove',e=>{
-    const r=el.getBoundingClientRect();
-    const x=(e.clientX-r.left)/r.width-.5;
-    const y=(e.clientY-r.top)/r.height-.5;
-    el.style.transform=`perspective(900px) rotateY(${x*8}deg) rotateX(${-y*6}deg) translateY(-6px) scale(1.02)`;
-  });
-  el.addEventListener('mouseleave',()=>{el.style.transform=''});
-});
-
-// ── LEARNING PATHS TABS ──
-document.querySelectorAll('.ptab').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.path-panel').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');
-    const panel=document.getElementById('tab-'+btn.dataset.tab);
-    if(panel){
-      panel.classList.add('active');
-      // re-trigger reveal animations
-      panel.querySelectorAll('.level-card').forEach((c,i)=>{
-        c.style.opacity='0';c.style.transform='translateY(32px)';
-        setTimeout(()=>{c.style.transition='opacity .6s ease, transform .6s ease';c.style.opacity='1';c.style.transform='none';},i*100);
+    // TABS
+    document.querySelectorAll('.ptab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ptab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.path-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const panel = document.getElementById('tab-' + btn.dataset.tab);
+        if (panel) {
+          panel.classList.add('active');
+          panel.querySelectorAll('.level-card').forEach((c, i) => {
+            c.style.opacity = '0'; c.style.transform = 'translateY(20px)';
+            setTimeout(() => { c.style.transition = 'opacity .5s ease,transform .5s ease'; c.style.opacity = '1'; c.style.transform = 'none'; }, i * 80);
+          });
+        }
       });
+    });
+
+    // AI TUTOR
+    const chatWindow = document.getElementById('chatWindow');
+    const tutorInput = document.getElementById('tutorInput');
+    const tutorSend = document.getElementById('tutorSend');
+    const fallbacks = [
+      q => `Good question. Before I explain, I want to find your starting point.\n\nFor "${q.slice(0, 50)}..." — which is closest to where you are?\n\n1. I don't know what this concept is at all\n2. I've heard of it but couldn't explain it\n3. I understand it conceptually but struggle to use it\n\nTell me which, and I'll start exactly there.`,
+      q => `Let's build real understanding here.\n\nFirst question: in your own words, what do you think "${q.slice(0, 40)}..." is trying to do? Even a rough guess is valuable — it tells me exactly where to start.\n\nDon't worry about being wrong. The goal is to find your current model so we can refine it.`,
+    ];
+    function addMsg(text, who = 'ai') { const d = document.createElement('div'); d.className = `msg ${who}`; d.textContent = text; chatWindow.appendChild(d); chatWindow.scrollTop = chatWindow.scrollHeight; return d; }
+    function addTyping() { const d = document.createElement('div'); d.className = 'msg ai typing'; d.innerHTML = '<i></i><i></i><i></i>'; chatWindow.appendChild(d); chatWindow.scrollTop = chatWindow.scrollHeight; return d; }
+    async function ask(q) {
+      addMsg(q, 'user');
+      const t = addTyping();
+      try {
+        const r = await fetch('/api/tutor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: q }) });
+        if (!r.ok) throw new Error();
+        const data = await r.json();
+        t.remove(); addMsg(data.reply || 'Let me guide you through this step by step.');
+      } catch {
+        await new Promise(r => setTimeout(r, 600));
+        t.remove();
+        addMsg(fallbacks[Math.floor(Math.random() * fallbacks.length)](q));
+      }
     }
-  });
-});
+    tutorSend.addEventListener('click', () => { const q = tutorInput.value.trim(); if (!q) return; tutorInput.value = ''; ask(q); });
+    tutorInput.addEventListener('keydown', e => { if (e.key === 'Enter') { const q = tutorInput.value.trim(); if (!q) return; tutorInput.value = ''; ask(q); } });
+    document.querySelectorAll('.qb').forEach(btn => btn.addEventListener('click', () => ask(btn.dataset.q)));
 
-// ── AI TUTOR DEMO ──
-const chatWindow=document.getElementById('chatWindow');
-const tutorForm=document.getElementById('tutorForm');
-const tutorInput=document.getElementById('tutorInput');
-const demoReplies=[
-  q=>`Great question! Before I explain, let me find your starting point.\n\nFor "${q}" — which part feels hardest right now:\n\n1. The concept itself (I don't know what it means)\n2. The syntax or formula (I know what it is, but get confused writing it)\n3. When to use it in a real problem\n\nTell me which, and I'll start exactly there.`,
-  q=>`Let's build real understanding, not just a quick answer.\n\nHere's how I approach "${q}" with you:\n\n• First: what's the underlying idea in plain English?\n• Second: one concrete example we work through together\n• Third: you solve a similar problem while I guide you\n\nWhat do you already know about this topic? Even a rough answer helps me calibrate.`,
-  q=>`I can help you master this.\n\nFor "${q}", the most common misconception is starting with the formula before understanding the why. Let's not do that.\n\nFirst question: can you describe in your own words what problem this concept is trying to solve? Don't worry if it's rough — that's exactly where we start.`
-];
-function addMsg(text,who='ai'){const div=document.createElement('div');div.className=`msg ${who}`;div.textContent=text;chatWindow.appendChild(div);chatWindow.scrollTop=chatWindow.scrollHeight;return div;}
-function addTyping(){const div=document.createElement('div');div.className='msg ai typing';div.innerHTML='<i></i><i></i><i></i>';chatWindow.appendChild(div);chatWindow.scrollTop=chatWindow.scrollHeight;return div;}
-async function askTutor(question){
-  addMsg(question,'user');
-  const typing=addTyping();
-  try{
-    const res=await fetch('/api/tutor',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:question})});
-    if(!res.ok)throw new Error('offline');
-    const data=await res.json();
-    typing.remove();addMsg(data.reply||data.message||'Great question — let me guide you through this step by step.');
-  }catch(err){
-    await new Promise(r=>setTimeout(r,700));
-    typing.remove();
-    const reply=demoReplies[Math.floor(Math.random()*demoReplies.length)](question);
-    addMsg(reply);
-  }
-}
-if(tutorForm){
-  tutorForm.addEventListener('submit',e=>{e.preventDefault();const q=tutorInput.value.trim();if(!q)return;tutorInput.value='';askTutor(q);});
-  document.querySelectorAll('.qp').forEach(btn=>btn.addEventListener('click',()=>askTutor(btn.dataset.q)));
-}
-
-// ── NAV SCROLL ──
-const navEl=document.querySelector('nav');
-window.addEventListener('scroll',()=>{navEl.style.background=scrollY>80?'rgba(3,9,10,.88)':'rgba(6,15,16,.7)';});
-</script>
+    // NAV scroll
+    const navEl = document.querySelector('nav');
+    window.addEventListener('scroll', () => { navEl.style.borderBottomColor = scrollY > 60 ? 'rgba(245,200,66,.12)' : 'rgba(245,200,66,.08)'; });
+  </script>
 </body>
+
 </html>
