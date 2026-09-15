@@ -33,6 +33,8 @@ app.use(rateLimit({
   validate: { xForwardedForHeader: false }
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.get('/login.html', (_req, res) => res.sendFile(path.join(__dirname, 'public', 'login.html')));
+app.get('/dashboard.html', (_req, res) => res.sendFile(path.join(__dirname, 'public', 'dashboard.html')));
 
 app.get('/api/health', (_req, res) => {
   res.json({ ok: true, app: 'Luminary Academy' });
